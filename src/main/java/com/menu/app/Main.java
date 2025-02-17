@@ -44,14 +44,18 @@ public class Main {
 	
 	// separated to insure upgrades and consistent formatting
 	public static void setOption(String s) {
-//		JFrame f = new JFrame();
 		String item = "";
+		Boolean update = false;
 		s = s.toLowerCase();
 		s.replace(" ", "_");
-		//separate the type(s) and item name
+		//separate the type(s) and item, and if to update item(u)
 		if (s.contains(":")) {
 			item = s.substring(s.indexOf(":") + 1, s.length());
 			s = s.substring(0, s.indexOf(":"));
+			if (s.contains("u")) {
+				update = true;
+				s = s.substring(0, s.indexOf("u"));
+			}
 		}
 		//based on type of item
 		switch(s) {
@@ -62,24 +66,34 @@ public class Main {
 			case "a" :
 			case "i" :
 			case "r" :
-			case "m" : {
+			case "m" : 
 				//if no item specified, get item name
 				if (item.equals("")) {
 					item = JOptionPane.showInputDialog(
 						"Please enter name of item");
 				}
-				//check if item is already entered
-				if(ObjectMngmt.getInstance().checkIfExists(
-							s, item)) {
-					//if entered, find item or rename item
-					GUIFactory.getGUI("f"+ s, item);
+				//if item needs to update
+				if (update) {
+					if(ObjectMngmt.getInstance().checkIfExists(
+                                                                s, item)) {
+                                                //if entered, find item or rename item
+                                                GUIFactory.getGUI("f"+ s, item);//********need to fix
+                                        } else {
+						 System.out.println("Item not found");
+					}
 				} else {
-					//if not entered, continue to adding
-					GUIFactory.getGUI(s, item);
-							}
+					//check if item is already entered
+					if(ObjectMngmt.getInstance().checkIfExists(
+								s, item)) {
+						//if entered, find item or rename item
+						GUIFactory.getGUI("f"+ s, item);
+					} else {
+						//if not entered, continue to adding
+						GUIFactory.getGUI(s, item);
+								}
+				}
 				GUIFactory.getGUI(".", item);
 				break;
-				}
 			case "find" :
 				//find item throuth ui
 				GUIFactory.getGUI("f" + s, item );

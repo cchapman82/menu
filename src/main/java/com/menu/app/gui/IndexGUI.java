@@ -74,11 +74,11 @@ public class IndexGUI implements GUIimplementation {
 			try {
 				String type = 
 				    JOptionPane.showInputDialog(f, 
-				      "Please enter type of item to enter--" +
+				      "Please enter type of item to update--" +
                                       "\nm for Menu Item \nr for Restaurant\n" +
                                       "i for Ingredient \na for Allergy");
 				f.dispose();
-				Main.setOption(type);
+				Main.setOption(type + "u:");
 			} catch (Exception ec) {
 				l3.setText("Action not preformed, try again");
 			}
