@@ -77,7 +77,7 @@ public class Main {
 					//if not entered, continue to adding
 					GUIFactory.getGUI(s, item);
 							}
-
+				GUIFactory.getGUI(".", item);
 				break;
 				}
 			case "find" :
