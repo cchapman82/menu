@@ -19,6 +19,7 @@ com/menu/app/MainController.class
 com/menu/app/IndexGUI.class
 com/menu/app/IngredientGUI.class
 com/menu/app/AllergyGUI$1.class
+com/menu/app/IndexGUI$5.class
 com/menu/app/GUIFactory.class
 com/menu/app/IngredientGUI$1.class
 com/menu/app/FindGUI$1.class

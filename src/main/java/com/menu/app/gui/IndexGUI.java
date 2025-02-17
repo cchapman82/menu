@@ -67,9 +67,30 @@ public class IndexGUI implements GUIimplementation {
 	});
 	f.add(b1);
 
-	JButton b2 = new JButton("Study Menu");
-	b2.setBounds(50, 150, 200, 30);
+	JButton b2 = new JButton("Update Item");
+	b2.setBounds(50, 130, 200, 30);
 	b2.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+			try {
+				String type = 
+				    JOptionPane.showInputDialog(f, 
+				      "Please enter type of item to enter--" +
+                                      "\nm for Menu Item \nr for Restaurant\n" +
+                                      "i for Ingredient \na for Allergy");
+				f.dispose();
+				Main.setOption(type);
+			} catch (Exception ec) {
+				l3.setText("Action not preformed, try again");
+			}
+
+		}
+        });
+
+	f.add(b2);
+
+	JButton b3 = new JButton("Study Menu");
+	b3.setBounds(50, 190, 200, 30);
+	b3.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 			try {
                         	name =
@@ -99,17 +120,18 @@ public class IndexGUI implements GUIimplementation {
                 }
         });
 
-	f.add(b2);
+	f.add(b3);
 
-	JButton b3 = new JButton("Close");
-	b3.setBounds(50, 230, 200, 30);
-	b3.addActionListener(new ActionListener() {
+
+	JButton b4 = new JButton("Close");
+	b4.setBounds(50, 250, 200, 30);
+	b4.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 			System.exit(1);
                 }
         });
 
-	f.add(b3);
+	f.add(b4);
 
 
 	f.setSize(500, 400);
