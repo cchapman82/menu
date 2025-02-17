@@ -1,0 +1,8 @@
+
+
+		Outline for menu program
+			java -cp target/menu-app-1.0.jar com.menu.app.Main
+	Main
+		MenuController
+			
+
