@@ -77,9 +77,10 @@ public class Main {
 					if(ObjectMngmt.getInstance().checkIfExists(
                                                                 s, item)) {
                                                 //if entered, find item or rename item
+						System.out.println(s + "****************");
                                                 GUIFactory.getGUI("f"+ s, item);//********need to fix
                                         } else {
-						 System.out.println("Item not found");
+						GUIFactory.getGUI("ms", "Item not found");// ************
 					}
 				} else {
 					//check if item is already entered
