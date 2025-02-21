@@ -38,6 +38,8 @@ public class GUIFactory {
 			case "fi" :
 				return new FindGUI("i");
 			*/
+			case "mc" :
+				return new MICollisionGUI(name);
 			case "ms" :
 				return new MessageGUI(name);
 			default :

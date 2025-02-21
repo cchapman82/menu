@@ -26,26 +26,26 @@ public class FindGUI implements GUIimplementation {
 			s = String.valueOf(s.charAt(0));
 		} else {*/
 			//populate lists for user choice
-			switch(s) {
-				case "r" :
-					list = ObjectMngmt.getInstance().getRestaurantList();
-					s = "Restaurant";
-					break;
-				case "m" :
-					list = ObjectMngmt.getInstance().getMenuList(s);
-					s = "Menu Item";
-					break;
-				case "a" :
-					list = ObjectMngmt.getInstance().getAllergyList();
-					s = "Allergy";
-					break;
-				case "i" :
-					list = ObjectMngmt.getInstance().getIngredientList();
-					s = "Ingredient";
-					break;
-				default :
-					break;
-			}
+		switch(s) {
+			case "r" :
+				list = ObjectMngmt.getInstance().getRestaurantList();
+				s = "Restaurant";
+				break;
+			case "m" :
+				list = ObjectMngmt.getInstance().getMenuList(s);
+				s = "Menu Item";
+				break;
+			case "a" :
+				list = ObjectMngmt.getInstance().getAllergyList();
+				s = "Allergy";
+				break;
+			case "i" :
+				list = ObjectMngmt.getInstance().getIngredientList();
+				s = "Ingredient";
+				break;
+			default :
+				break;
+		}
 	//	}
 		//because I need to use the string as final for the actionListener
 		final String ss = s;
@@ -68,7 +68,7 @@ public class FindGUI implements GUIimplementation {
 
 		int yAxis = 80;
                 int xAxis = 70;
-                if (rs.length == 0) {
+ /*               if (rs.length == 0) {
         		JFrame ff = new JFrame(name + " exists already");
         		ff.setJMenuBar(mb);
 			JTextArea l1 = new JTextArea();
@@ -91,12 +91,12 @@ public class FindGUI implements GUIimplementation {
                         sb.addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent e4) {
                                      //   final String itemOne = item;
-                                       // if (/*ObjectMngmt.getInstance().checkIfExists(ss, item)*/) {
+                                       // if (/*ObjectMngmt.getInstance().checkIfExists(ss, item)) {
                                     /*            String input = JOptionPane.showInputDialog(item  +
                                                                 " is already entered into the program" +
                                                                 " please enter the name of the " +
-                                                                "restaurant to append to the item");*/
-                                                Main.setOption(ss + ":" + itemOne + tf.getText());
+                                                                "restaurant to append to the item");
+                                                Main.setOption(ss + ":" + itemOne + "_" + tf.getText());
 						ff.dispose();
                                        // }
                                 }
@@ -118,32 +118,33 @@ public class FindGUI implements GUIimplementation {
 			ff.setVisible(true);
 			ff.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-                } else {
+                } else {*/
 
-        		JFrame ff = new JFrame(s + " not found");
-        		ff.setJMenuBar(mb);
-			JTextArea l1 = new JTextArea("Please enter from option below or home to go back to main menu");
-			l1.setBounds(50, 10, 400, 60);
-			l1.setLineWrap(true);
-			ff.add(l1);
-                        for (int i = 0; i < rs.length; i++) {
-                                JButton bb = new JButton(rs[i]);
-                                bb.setBounds(xAxis, yAxis, 100, 30);
-                                bb.addActionListener(new ActionListener() {
-                                        public void actionPerformed(ActionEvent e3) {
-                                                Main.setOption(bb.getText());
-                                        }
-                                });
-                                yAxis += 50;
-                                if ((i%3 == 0) && (i > 3)) {
-                                        xAxis += 40;
+        	JFrame ff = new JFrame(s + " not found");
+       		ff.setJMenuBar(mb);
+		JTextArea l1 = new JTextArea("Please enter from option below or home to go back to main menu");
+		l1.setBounds(50, 10, 400, 60);
+		l1.setLineWrap(true);
+		ff.add(l1);
+                for (int i = 0; i < rs.length; i++) {
+   	                JButton bb = new JButton(rs[i]);
+                        bb.setBounds(xAxis, yAxis, 100, 30);
+                        bb.addActionListener(new ActionListener() {
+                             	public void actionPerformed(ActionEvent e3) {
+                                   	Main.setOption(bb.getText());
                                 }
-                                ff.add(bb);
+                    	});
+                        yAxis += 50;
+                        if ((i%3 == 0) && (i > 3)) {
+                           	xAxis += 40;
+                        }
+                        ff.add(bb);
+		}
 		JButton b = new JButton("To Home");
                 b.setBounds(250, 400, 100, 30);
                 b.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                                GUIFactory.getGUI("f", "");
+                                GUIFactory.getGUI("ix", "");
                                 ff.dispose();
                         }
                 });
@@ -154,8 +155,6 @@ public class FindGUI implements GUIimplementation {
 		ff.setLayout(null);
 		ff.setVisible(true);
 		ff.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
- }
-                }
 
 
 /*		JButton b = new JButton("To Home");

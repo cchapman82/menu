@@ -86,8 +86,12 @@ public class Main {
 					//check if item is already entered
 					if(ObjectMngmt.getInstance().checkIfExists(
 								s, item)) {
-						//if entered, find item or rename item
-						GUIFactory.getGUI("f", s, item);
+						if(s.equals("m")) {
+							GUIFactory.getGUI("mc", item);
+						} else {
+							//if entered, find item or rename item
+							GUIFactory.getGUI("f", s, item);
+						}
 					} else {
 						//if not entered, continue to adding
 						GUIFactory.getGUI(s, item);
@@ -95,9 +99,9 @@ public class Main {
 				}
 				GUIFactory.getGUI(".", item);
 				break;
-			case "find" :
+			case "f" :
 				//find item throuth ui
-				GUIFactory.getGUI("f", s, item );
+				GUIFactory.getGUI(s, "r", item);
 				break;
 			default :
 				//default action is to study

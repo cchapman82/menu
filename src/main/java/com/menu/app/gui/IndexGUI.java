@@ -109,7 +109,7 @@ public class IndexGUI implements GUIimplementation {
 							toLowerCase().
 							replace(" ", "_")).
 							equals(false)) {
-					Main.setOption("find:r");
+					Main.setOption("f:r");
 
 					f.dispose();	
 				}
