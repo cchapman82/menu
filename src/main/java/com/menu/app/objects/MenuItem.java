@@ -26,7 +26,6 @@ package com.menu.app;
  *
  * */
 
-import java.util.Scanner;
 
 public class MenuItem implements ObjectMaker {
 

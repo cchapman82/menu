@@ -12,7 +12,7 @@ package com.menu.app;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class MICollisionGUI implements GUIimplementation {
+public class MICollisionGUI implements GUIImplementation {
 
 	MICollisionGUI(String name) {
 		JFrame ff = new JFrame(name + " exists already");

@@ -11,7 +11,7 @@ package com.menu.app;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class IndexGUI implements GUIimplementation {
+public class IndexGUI implements GUIImplementation {
 
 	private MainController mc = MainController.getInstance();
 	private Boolean cont = true;

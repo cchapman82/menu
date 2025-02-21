@@ -9,7 +9,7 @@ package com.menu.app;
  */
 
 
-public interface GUIimplementation {
+public interface GUIImplementation {
 	
 	String GUIType = null;
 

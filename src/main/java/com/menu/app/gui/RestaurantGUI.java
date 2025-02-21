@@ -12,7 +12,7 @@ package com.menu.app;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class RestaurantGUI implements GUIimplementation {
+public class RestaurantGUI implements GUIImplementation {
 
 	private ObjectMngmt objMngmt = ObjectMngmt.getInstance();
 

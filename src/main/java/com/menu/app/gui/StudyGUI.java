@@ -13,7 +13,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 
-public class StudyGUI implements GUIimplementation {
+public class StudyGUI implements GUIImplementation {
 
 	StudyGUI(String name) {
 
@@ -67,7 +67,7 @@ public class StudyGUI implements GUIimplementation {
 		b.setBounds(250, 400, 100, 30);
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GUIFactory.getGUI("f", name);
+				GUIFactory.getGUI("ix", name);
 				f.dispose();
 			}
 		});

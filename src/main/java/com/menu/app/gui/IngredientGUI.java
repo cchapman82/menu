@@ -12,7 +12,7 @@ package com.menu.app;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class IngredientGUI implements GUIimplementation {
+public class IngredientGUI implements GUIImplementation {
 
 	private ObjectMngmt objMngmt = ObjectMngmt.getInstance();
 

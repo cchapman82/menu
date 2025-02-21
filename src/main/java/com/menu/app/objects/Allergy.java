@@ -21,7 +21,6 @@ package com.menu.app;
  *
  * */
 
-import java.util.Scanner;
 
 public class Allergy implements ObjectMaker {
 

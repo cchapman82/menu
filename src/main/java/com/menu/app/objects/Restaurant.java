@@ -19,7 +19,6 @@ package com.menu.app;
  *
  * */
 
-import java.util.ArrayList;
 
 public class Restaurant implements ObjectMaker {
 

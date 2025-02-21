@@ -12,7 +12,7 @@ package com.menu.app;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class AllergyGUI implements GUIimplementation {
+public class AllergyGUI implements GUIImplementation {
 
 	ObjectMngmt objMngmt = ObjectMngmt.getInstance();
 

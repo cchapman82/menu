@@ -76,7 +76,6 @@ public class DatabaseController {
 			conn = DriverManager.getConnection(url, user, password);
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
-			System.out.println("Connected");
 
 		} catch (Exception e) {
 			System.out.println("Connection to database unsuccesfull");
@@ -91,7 +90,6 @@ public class DatabaseController {
 			// ingredient table
 			ResultSet ingredientTable = metaData.getTables(null,null, "ingredient", null);
 			if (ingredientTable.next()) {
-				System.out.println("Table is available");
 			} else {
 				String sql = "CREATE TABLE ingredient (name varchar primary key," +
 				      "description varchar, cost float not null)";
@@ -100,7 +98,6 @@ public class DatabaseController {
 			// restaurant table
 			ResultSet restaurantTable = metaData.getTables(null,null, "restaurant",null);
 			if (restaurantTable.next()) {
-				System.out.println("Table is available");
 			} else {
 				String sql= "CREATE TABLE restaurant (name varchar primary key," +
 				        " location varchar, description varchar)";
@@ -109,7 +106,6 @@ public class DatabaseController {
 			// allergy table
 			ResultSet allergyTable = metaData.getTables(null, null, "allergy", null);
 			if (allergyTable.next()) {
-				System.out.println("Table is available");
 			} else {
 				String sql = "CREATE TABLE allergy (name varchar primary key," +
 				      " description varchar, tx varchar)";
@@ -118,7 +114,6 @@ public class DatabaseController {
 			// menuItem table
 			ResultSet menuItemTable = metaData.getTables(null, null, "menuitem", null);
 			if (menuItemTable.next()) {
-				System.out.println("Table is available");
 			} else {
 				String sql = "CREATE TABLE menuItem (name varchar primary key," +
 				      "restaurant varchar, menuCategory varchar, description" +

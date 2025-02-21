@@ -5,6 +5,7 @@ com/menu/app/IndexGUI$2.class
 com/menu/app/MICollisionGUI$1.class
 com/menu/app/Restaurant.class
 com/menu/app/StudyGUI$1.class
+com/menu/app/GUIImplementation.class
 com/menu/app/FindGUI.class
 com/menu/app/IngredientGUI$3.class
 com/menu/app/RestaurantGUI$3.class
@@ -39,7 +40,6 @@ com/menu/app/MessageGUI.class
 com/menu/app/AllergyGUI.class
 com/menu/app/StudyGUI$2.class
 com/menu/app/AllergyGUI$3.class
-com/menu/app/GUIimplementation.class
 com/menu/app/RestaurantGUI.class
 com/menu/app/IndexGUI$4.class
 com/menu/app/ObjectMngmt.class

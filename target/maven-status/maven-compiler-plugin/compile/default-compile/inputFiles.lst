@@ -4,6 +4,7 @@
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/GUIFactory.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/MenuItemGUI.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/AllergyGUI.java
+/home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/GUIImplementation.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/RestaurantGUI.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/Main.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/objects/Study.java
@@ -18,5 +19,4 @@
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/objects/MenuItem.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/IndexGUI.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/objects/ObjectMngmt.java
-/home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/GUIimplementation.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/FindGUI.java
