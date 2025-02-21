@@ -78,7 +78,7 @@ public class Main {
                                                                 s, item)) {
                                                 //if entered, find item or rename item
 						System.out.println(s + "****************");
-                                                GUIFactory.getGUI("f"+ s, item);//********need to fix
+                                                GUIFactory.getGUI("f", s, item);//********need to fix
                                         } else {
 						GUIFactory.getGUI("ms", "Item not found");// ************
 					}
@@ -87,7 +87,7 @@ public class Main {
 					if(ObjectMngmt.getInstance().checkIfExists(
 								s, item)) {
 						//if entered, find item or rename item
-						GUIFactory.getGUI("f"+ s, item);
+						GUIFactory.getGUI("f", s, item);
 					} else {
 						//if not entered, continue to adding
 						GUIFactory.getGUI(s, item);
@@ -97,7 +97,7 @@ public class Main {
 				break;
 			case "find" :
 				//find item throuth ui
-				GUIFactory.getGUI("f" + s, item );
+				GUIFactory.getGUI("f", s, item );
 				break;
 			default :
 				//default action is to study
