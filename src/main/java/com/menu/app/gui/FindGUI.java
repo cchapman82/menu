@@ -18,7 +18,6 @@ public class FindGUI implements GUIImplementation {
 
 		String list = "";
 		JFrame f = new JFrame();
-		System.out.println("in GUI find " + s + "**" + name);
 		//populate lists for user choice
 		switch(s) {
 			case "r" :
@@ -60,9 +59,9 @@ public class FindGUI implements GUIImplementation {
 		int yAxis = 80;
                 int xAxis = 70;
 
-        	JFrame ff = new JFrame(s + " not found");
+        	JFrame ff = new JFrame(s + " Already entered");
        		ff.setJMenuBar(mb);
-		JTextArea l1 = new JTextArea("Please enter from option below or home to go back to main menu");
+		JTextArea l1 = new JTextArea(s + " Already enteredm Please enter from options below or home to go back to main menu");
 		l1.setBounds(50, 10, 400, 60);
 		l1.setLineWrap(true);
 		ff.add(l1);

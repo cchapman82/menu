@@ -41,6 +41,17 @@ public class GUIFactory {
 		switch(s) {
 			case "f" :
 				return new FindGUI(type, name);
+			case "u" :
+				switch(type) {
+					case "m" :
+						return new UpdateMIGUI(type, name);
+					case "a" :
+						return new UpdateAGUI(type, name);
+					case "i" :
+						return new UpdateIGUI(type, name);
+					case "r" :
+						return new UpdateRGUI(type, name);
+				}
 			default :
 				return new IndexGUI();
 		}

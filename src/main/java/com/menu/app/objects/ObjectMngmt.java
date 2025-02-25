@@ -277,5 +277,39 @@ public class ObjectMngmt {
 		result = result.substring(0, result.lastIndexOf("\n"));
 		return result;
 	}
+	public String getObjectString(String type, String name) {
+		String result = "";
+		switch(type) {
+			case "m" :
+				for(MenuItem m : menuList) {
+					if(m.getName().equals(name)) {
+						result += (m.menuItemToString());
+					}
+				}
+			
+			case "a" :
+				for(Allergy a : allergyList) {
+					
+					if(a.getName().equals(name)) {
+						result += a.allergyToString();
+					}
+				}
+			case "r" :
+				for(Restaurant r : restaurantList) {
+					
+					if(r.getName().equals(name)) {
+						result += r.restaurantToString();
+					}
+				}
+			case "i" :
+				for(Ingredient i : ingredientList) {
+					
+					if(i.getName().equals(name)) {
+						result += i.ingredientToString();
+					}
+				}
+		}
+		return result;
+	}
 }
 

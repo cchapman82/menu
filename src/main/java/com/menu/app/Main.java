@@ -78,9 +78,10 @@ public class Main {
                                                                 s, item)) {
                                                 //if entered, find item or rename item
 						System.out.println(s + "****************");
-                                                GUIFactory.getGUI("f", s, item);//********need to fix
+                                                GUIFactory.getGUI("u", s, item);//****
                                         } else {
-						GUIFactory.getGUI("ms", "Item not found");// ************
+						GUIFactory.getGUI("ms", item.toUpperCase() 
+								+ "  not found not entered");
 					}
 				} else {
 					//check if item is already entered

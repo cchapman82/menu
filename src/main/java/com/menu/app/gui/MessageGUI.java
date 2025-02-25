@@ -31,9 +31,6 @@ public class MessageGUI implements GUIImplementation {
 		JTextArea ta = new JTextArea(message);
 		ta.setBounds(10, 10, 200, 30);
 		f.add(ta);
-		JTextField t = new JTextField();
-		t.setBounds(50, 50, 100, 30);
-		f.add(t);
 		
 		JButton b = new JButton("To Home");
 		b.setBounds(250, 400, 100, 30);
