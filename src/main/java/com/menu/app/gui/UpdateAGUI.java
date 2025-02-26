@@ -11,8 +11,12 @@ package com.menu.app;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Map;
+import java.util.HashMap;
 
 public class UpdateAGUI implements GUIImplementation {
+
+	private Map<String,String> map = new HashMap<String, String>();
 
         UpdateAGUI(String type, String name) {
 
@@ -37,23 +41,23 @@ public class UpdateAGUI implements GUIImplementation {
 
                 String[] objectInfo = ObjectMngmt.getInstance().getObjectString(type, name).split(",");
 
-     		JLabel ja1 = new JLabel("Name");
-     		ja1.setBounds(60, 150, 100, 30);
-              	f.add(ja1);
+     		JLabel jl1 = new JLabel("Name");
+     		jl1.setBounds(60, 150, 100, 30);
+              	f.add(jl1);
         	JTextArea ta1 = new JTextArea(objectInfo[0]);
                 ta1.setBounds(180, 150, 260, 30);
          	f.add(ta1);
 
-       		JLabel ja2 = new JLabel("Description");
-		ja2.setBounds(60, 190, 100, 30);
-           	f.add(ja2);
+       		JLabel jl2 = new JLabel("Description");
+		jl2.setBounds(60, 190, 100, 30);
+           	f.add(jl2);
      		JTextArea ta2 = new JTextArea(objectInfo[1]);
             	ta2.setBounds(180, 190, 260, 30);
            	f.add(ta2);
 
-         	JLabel ja3 = new JLabel("Treatment");
-          	ja3.setBounds(60, 230, 100, 30);
-             	f.add(ja3);
+         	JLabel jl3 = new JLabel("Treatment");
+          	jl3.setBounds(60, 230, 100, 30);
+             	f.add(jl3);
           	JTextArea ta3 = new JTextArea(objectInfo[2]);
       		ta3.setBounds(180, 230, 260, 30);
               	f.add(ta3);
@@ -74,6 +78,16 @@ public class UpdateAGUI implements GUIImplementation {
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed( ActionEvent e) {
 				System.out.println("Submitting");
+				if(!ta1.getText().equals(objectInfo[0])) {
+                                        map.put(jl1.getText().toLowerCase(), ta1.getText());
+                                }
+                                if(!ta2.getText().equals(objectInfo[1])) {
+                                        map.put(jl2.getText().toLowerCase(), ta2.getText());
+                                }
+                                if(!ta3.getText().equals(objectInfo[2])) {
+                                        map.put(jl3.getText().toLowerCase(), ta3.getText());
+                                }
+				DatabaseController.getInstance().updateInfo(type, name, map);
 			}
 		});
 		f.add(b2);

@@ -39,6 +39,7 @@ package com.menu.app;
 
 import java.sql.*;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Set;
 
 public class DatabaseController {
@@ -324,16 +325,19 @@ public class DatabaseController {
 			e.printStackTrace();
 		}
 	}
-/*
+
 	//receive update information
 	public void updateInfo(String type, String name, Map map) {
 
 		Set<String> keys = map.keySet();
-		if (keys.containsKey("name")) {
-			
+		for(String k : keys) {
+			System.out.println(k);
 		}
+		//if (keys.containsKey("name")) {
+			
+		//}
 
 	}
-*/
+
 
 }

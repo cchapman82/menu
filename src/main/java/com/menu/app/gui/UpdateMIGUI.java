@@ -11,8 +11,12 @@ package com.menu.app;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UpdateMIGUI implements GUIImplementation {
+
+	private Map<String,String> map = new HashMap<String,String>();
 
 	UpdateMIGUI(String type, String name) {
 
@@ -115,8 +119,38 @@ public class UpdateMIGUI implements GUIImplementation {
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Submitting");
+				if(!ta1.getText().equals(objectInfo[0])) {
+					map.put(jl1.getText().toLowerCase(), ta1.getText());
+				}
+				if(!ta2.getText().equals(objectInfo[1])) {
+					map.put(jl2.getText().toLowerCase(), ta2.getText());
+				}
+				if(!ta3.getText().equals(objectInfo[2])) {
+					map.put(jl3.getText().toLowerCase(), ta3.getText());
+				}
+				if(!ta4.getText().equals(objectInfo[3])) {
+					map.put(jl4.getText().toLowerCase(), ta4.getText());
+				}
+				if(!ta5.getText().equals(objectInfo[4])) {
+					map.put(jl5.getText().toLowerCase(), ta5.getText());
+				}
+				if(!ta6.getText().equals(objectInfo[5])) {
+					map.put(jl6.getText().toLowerCase(), ta6.getText());
+				}
+				if(!ta7.getText().equals(objectInfo[6])) {
+					map.put(jl7.getText().toLowerCase(), ta7.getText());
+				}
+				if(!ta8.getText().equals(objectInfo[7])) {
+					map.put(jl8.getText().toLowerCase(), ta8.getText());
+				}
+				if(!ta9.getText().equals(objectInfo[8])) {
+					map.put(jl9.getText().toLowerCase(), ta9.getText());
+				}
+				DatabaseController.getInstance().updateInfo(type, name, map);
+
 			}
 		});
+
 		f.add(b2);
 
 
