@@ -311,5 +311,14 @@ public class ObjectMngmt {
 		}
 		return result;
 	}
+
+	public void updateLists() {
+		restaurantList.clear();
+		menuList.clear();
+		allergyList.clear();
+		ingredientList.clear();
+
+		DatabaseController.getInstance().populateLists();
+	}
 }
 

@@ -78,8 +78,8 @@ public class UpdateIGUI implements GUIImplementation {
 		f.add(jl4);
 
 		JButton b2 = new JButton("Submit");
-		b2.setBounds(200, 330, 100, 30);
-		b.addActionListener(new ActionListener() {
+		b2.setBounds(300, 330, 100, 30);
+		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int option = JOptionPane.showConfirmDialog(f, "Is this information " +
 						"correct?\n\t" + jl1.getText() + ": " + ta1.getText()

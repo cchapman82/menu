@@ -59,7 +59,7 @@ public class DatabaseController {
 	private DatabaseController() {
 		conn = connect();
 		createTable();
-		populateLists(lists);
+		populateLists();
 	}
 
 
@@ -170,7 +170,7 @@ public class DatabaseController {
 	}
 	
 	//  Query tables in psql databases to populate the array list in Object Management
-	private void populateLists(String[] lists) {	
+	public void populateLists() {	
 		String sqlBase = "SELECT * FROM ";
 		String sqlPlus = sqlBase;
 		ResultSet rs;
@@ -276,6 +276,31 @@ public class DatabaseController {
     	                                 	rs.getString("preparationStyle")+"," +
                                      		rs.getString("size") + "," +
                                        		rs.getString("allergies");
+					break;
+				case "a" : 
+					sqlBase += "allergy WHERE NAME = '" + name + "'";
+					rs = stmt.executeQuery(sqlBase);
+					rs.first();
+					result = rs.getString("name") + "," +
+                            	                rs.getString("description") + "," +
+						rs.getString("tx");
+					break;
+				case "i" : 
+					sqlBase += "ingredient WHERE NAME = '" + name + "'";
+					rs = stmt.executeQuery(sqlBase);
+					rs.first();
+					result = rs.getString("name") + "," +
+                            	                rs.getString("description") + "," +
+						rs.getDouble("cost");
+					break;
+				case "r" : 
+					sqlBase += "restaurant WHERE NAME = '" + name + "'";
+					rs = stmt.executeQuery(sqlBase);
+					rs.first();
+					result = rs.getString("name") + "," +
+						rs.getString("location") + "," +
+                            	                rs.getString("description");
+					break;
 
 			}
 			
@@ -358,15 +383,57 @@ public class DatabaseController {
 		String info = "";
 		Set<String> keys = map.keySet();
 		for(String k : keys) {
-			System.out.println(k);
 			if (k.equals("name")) {
 				info = getItem(type,name.replace(","," ").replace(" ", "_"));
 				String newInfo = String.valueOf(map.get(k)).replace(","," ").replace(" ","_");
 				newInfo += info.substring(info.indexOf(","), info.length());
-				System.out.println(info);
-				System.out.println(newInfo);
-			}
+				deleteItem(type,name.replace(","," ").replace(" ", "_"));
+				String[] nInfo = newInfo.split(",");
+				String nnInfo ="'";
+				for(int i = 0; i < nInfo.length; i++) {
+					switch(type) {
+						case "m" :
+							if(i == 0) {
+								nnInfo += nInfo[i] + "','";
+							} else if(i == 3) {
+								nnInfo += nInfo[i] + "',";	
+							}else if(i == 4) {
+								nnInfo +=  nInfo[i] + ",'";
+							} else if(i == nInfo.length - 1) {
+								nnInfo += nInfo[i] + "'"; 
+							} else {
+								nnInfo +=  nInfo[i] + "','";
+							}
+							break;
+						case "a" :
+						case "r" :
+							if(i == 0) {
+								nnInfo += nInfo[i] + "','";
+							} else if(i == nInfo.length - 1) {
+								nnInfo += nInfo[i] + "'"; 
+							} else {
+								nnInfo +=  nInfo[i] + "','";	
+							}
+							break;
+						case "i" :
+							if(i == 0) {
+								nnInfo += nInfo[i] + "','";
+							} else if(i == 1) {
+								nnInfo += nInfo[i] + "',";
+							} else {
+								nnInfo += nInfo[i];
+							}
+							break;
+					}
+				}
+				addItem(type,nnInfo);
+			} else {
+				updateItem(type,name.replace(","," ").replace(" ", "_"), k, 
+						String.valueOf(map.get(k)).replace(","," ").replace(" ", "_"));
+			}	
 		}
+		ObjectMngmt.getInstance().updateLists();
+
 	}
 
 
