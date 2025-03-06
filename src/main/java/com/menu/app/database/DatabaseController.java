@@ -257,6 +257,33 @@ public class DatabaseController {
 		}
 	}
 
+	private String getItem(String type, String name) {
+		String result = "";
+		ResultSet rs;
+		String sqlBase = "SELECT * FROM ";
+		try {
+			switch(type) {
+				case "m" : 
+					sqlBase += "menuitem WHERE NAME = '" + name + "'";
+					rs = stmt.executeQuery(sqlBase);
+					rs.first();
+					result = rs.getString("name") + "," +
+                                                rs.getString("restaurant") + "," +
+                                              	rs.getString("menuCategory") + "," +
+                            	                rs.getString("description") + "," +
+       		                                rs.getDouble("price") + "," + 
+ 						rs.getString("ingredients") + "," +
+    	                                 	rs.getString("preparationStyle")+"," +
+                                     		rs.getString("size") + "," +
+                                       		rs.getString("allergies");
+
+			}
+			
+		} catch (SQLException e)  {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	// update item already in database from ojbect string
 	public void updateItem(String targetDatabase,String itemName,String fieldName,String newInfo) {
@@ -265,26 +292,26 @@ public class DatabaseController {
 		try {
 			switch(targetDatabase) {
 				case "m" :
-					sqlPlus += "menuitem set " + fieldName + "=" + newInfo + 
-						"where name=" + itemName;
+					sqlPlus += "menuitem set " + fieldName + "='" + newInfo + 
+						"' where name='" + itemName + "'";
 					stmt.executeUpdate(sqlPlus);
 					sqlPlus = sqlBase;
 					break;
 				case "i" :
-					sqlPlus += "ingredient set " + fieldName + "=" + newInfo + 
-						"where name=" + itemName;
+					sqlPlus += "ingredient set " + fieldName + "='" + newInfo + 
+						"' where name='" + itemName + "'";
 					stmt.executeUpdate(sqlPlus);
 					sqlPlus = sqlBase;
 					break;
 				case "r" :
-					sqlPlus += "restaurant set " + fieldName + "=" + newInfo + 
-						"where name=" + itemName;
+					sqlPlus += "restaurant set " + fieldName + "='" + newInfo + 
+						"' where name='" + itemName + "'";
 					stmt.executeUpdate(sqlPlus);
 					sqlPlus = sqlBase;
 					break;
 				case "a" :
-					sqlPlus += "allergy set " + fieldName + "=" + newInfo + 
-						"where name=" + itemName;
+					sqlPlus += "allergy set " + fieldName + "='" + newInfo + 
+						"' where name='" + itemName + "'";
 					stmt.executeUpdate(sqlPlus);
 					sqlPlus = sqlBase;
 					break;
@@ -301,22 +328,22 @@ public class DatabaseController {
 		try {	
 			switch(targetDatabase) {
 				case "m" :
-					sqlPlus += "menuitem where name=" + item;
+					sqlPlus += "menuitem where name='" + item + "'";
 					stmt.executeUpdate(sqlPlus);
 					sqlPlus = sqlBase;
 					break;
 				case "i" :
-					sqlPlus += "ingredient where name=" + item ;
+					sqlPlus += "ingredient where name='" + item + "'";
 					stmt.executeUpdate(sqlPlus);
 					sqlPlus = sqlBase;
 					break;
 				case "r" :
-					sqlPlus += "restaurant where name=" + item;
+					sqlPlus += "restaurant where name='" + item + "'";
 					stmt.executeUpdate(sqlPlus);
 					sqlPlus = sqlBase;
 					break;
 				case "a" :
-					sqlPlus += "allergy where name=" + item;
+					sqlPlus += "allergy where name='" + item + "'";
 					stmt.executeUpdate(sqlPlus);
 					sqlPlus = sqlBase;
 					break;
@@ -328,15 +355,18 @@ public class DatabaseController {
 
 	//receive update information
 	public void updateInfo(String type, String name, Map map) {
-
+		String info = "";
 		Set<String> keys = map.keySet();
 		for(String k : keys) {
 			System.out.println(k);
+			if (k.equals("name")) {
+				info = getItem(type,name.replace(","," ").replace(" ", "_"));
+				String newInfo = String.valueOf(map.get(k)).replace(","," ").replace(" ","_");
+				newInfo += info.substring(info.indexOf(","), info.length());
+				System.out.println(info);
+				System.out.println(newInfo);
+			}
 		}
-		//if (keys.containsKey("name")) {
-			
-		//}
-
 	}
 
 

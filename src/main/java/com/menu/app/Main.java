@@ -106,8 +106,8 @@ public class Main {
 				break;
 			default :
 				//default action is to study
-				mc.studyRestaurant(s);
-				GUIFactory.getGUI("s", s);
+		//		mc.studyRestaurant(s);
+				GUIFactory.getGUI(".", s);
 				break;
 		}
 	}

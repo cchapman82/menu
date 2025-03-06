@@ -78,6 +78,7 @@ public class IndexGUI implements GUIImplementation {
                                       "\nm for Menu Item \nr for Restaurant\n" +
                                       "i for Ingredient \na for Allergy");
 				f.dispose();
+
 				Main.setOption(type + "u:");
 			} catch (Exception ec) {
 				l3.setText("Action not preformed, try again");
