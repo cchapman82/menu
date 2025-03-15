@@ -47,8 +47,8 @@ public class DatabaseController {
 	//instance variables
 	private static DatabaseController dbCon;
 	private final String url = "jdbc:postgresql://localhost:5432/menu";
-	private final String user = "christopher";
-	private final String password = "Decuit55Mihi!";
+	private final String user = "";
+	private final String password = "";
 	private Connection conn;
 	private final String[] lists = {"m", "r", "i", "a"};
 	private ObjectMngmt objMngmt = ObjectMngmt.getInstance();
