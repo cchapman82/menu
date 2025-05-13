@@ -41,18 +41,21 @@ import java.sql.*;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.Properties;
+import java.io.InputStream;
+import java.io.IOException;
 
 public class DatabaseController {
 
 	//instance variables
 	private static DatabaseController dbCon;
-	private final String url = "jdbc:postgresql://localhost:5432/menu";
-	private final String user = "christopher";
-	private final String password = "Decuit55Mihi!";
 	private Connection conn;
 	private final String[] lists = {"m", "r", "i", "a"};
 	private ObjectMngmt objMngmt = ObjectMngmt.getInstance();
 	private Statement stmt;
+	private PreparedStatement prepdstmt;
+	private String sql;
+	private Properties prop = new Properties();
 
 
 	//constructors with initial methods
@@ -76,11 +79,16 @@ public class DatabaseController {
 	//initial methods
 	private Connection connect() {
 		try {
-			conn = DriverManager.getConnection(url, user, password);
+			InputStream dbprops = DatabaseController.class.getClassLoader().getResourceAsStream("config.properties");
+			prop.load(dbprops);
+			conn = DriverManager.getConnection(prop.getProperty("URL"),
+					prop.getProperty("CONNECTION_USERNAME"),
+					prop.getProperty("CONNECTION_PASSWORD"));
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Connection to database unsuccesfull");
 		}
 		return conn;
@@ -89,43 +97,23 @@ public class DatabaseController {
 	//check if database has tables, create if not
 	private void createTable() {
 		try {
-			DatabaseMetaData metaData = conn.getMetaData();
-			// ingredient table
-			ResultSet ingredientTable = metaData.getTables(null,null, "ingredient", null);
-			if (ingredientTable.next()) {
-			} else {
-				String sql = "CREATE TABLE ingredient (name varchar primary key," +
-				      "description varchar, cost float not null)";
-				stmt.executeUpdate(sql);
-			}
-			// restaurant table
-			ResultSet restaurantTable = metaData.getTables(null,null, "restaurant",null);
-			if (restaurantTable.next()) {
-			} else {
-				String sql= "CREATE TABLE restaurant (name varchar primary key," +
-				        " location varchar, description varchar)";
-				stmt.executeUpdate(sql);
-			}	
-			// allergy table
-			ResultSet allergyTable = metaData.getTables(null, null, "allergy", null);
-			if (allergyTable.next()) {
-			} else {
-				String sql = "CREATE TABLE allergy (name varchar primary key," +
-				      " description varchar, tx varchar)";
-				stmt.executeUpdate(sql);
-			}
-			// menuItem table
-			ResultSet menuItemTable = metaData.getTables(null, null, "menuitem", null);
-			if (menuItemTable.next()) {
-			} else {
-				String sql = "CREATE TABLE menuItem (name varchar primary key," +
-				      "restaurant varchar, menuCategory varchar, description" +
-				     " varchar, price float, ingredients varchar, " +
-				     "preparationStyle varchar, size varchar, allergies varchar)";
-				stmt.executeUpdate(sql);
-			}
+			sql = "CREATE TABLE IF NOT EXISTS ingredient (id serial primary key, " +
+			       "name varchar, description varchar, cost float not null)";
+			stmt.executeUpdate(sql);
+			sql= "CREATE TABLE IF NOT EXISTS restaurant (id serial primary key, " +
+				"name varchar, location varchar, description varchar)";
+			stmt.executeUpdate(sql);
+			sql = "CREATE TABLE IF NOT EXISTS allergy (id serial primary key, " +
+					"name varchar, description varchar, tx varchar)";
+			stmt.executeUpdate(sql);
+			sql = "CREATE TABLE IF NOT EXISTS menuItem (id serial primary key, " +
+					"name varchar, restaurant varchar, menuCategory varchar, description" +
+			     " varchar, price float, ingredients varchar, " +
+			     "preparationStyle varchar, size varchar, allergies varchar)";
+			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
 			System.out.println("Tables not created or accessable");
+			e.printStackTrace();
 		}
 	}
 
@@ -133,31 +121,48 @@ public class DatabaseController {
 
 
 	// Add/insert from item type and string from object
-	public void addItem(String targetDatabase, String item) {
-		String sqlBase = "INSERT INTO ";
-		String sqlPlus = sqlBase;
+	public void addItem(String type, String item) {
 		try {
-			switch(targetDatabase) {
+			String[] itemFields = item.split(",");
+			switch(type) {
 				case "m" :
 					System.out.println(item);
-					sqlPlus += "menuitem values (" + item + ")";
-					stmt.executeUpdate(sqlPlus);
-					sqlPlus = sqlBase;
+					sql = "INSERT INTO menuitem (name, restaurant, menuCategory, description, price, ingredients, size, allergies) values (?, ?, ?, ?, ?, ?, ?, ?)";
+			
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, itemFields[0]);
+					prepdstmt.setString(2, itemFields[1]);
+					prepdstmt.setString(3, itemFields[2]);
+					prepdstmt.setString(4, itemFields[3]);
+					prepdstmt.setDouble(5, Double.parseDouble(itemFields[4]));
+					prepdstmt.setString(6, itemFields[5]);
+					prepdstmt.setString(7, itemFields[6]);
+					prepdstmt.setString(8, itemFields[7]);
+					prepdstmt.executeUpdate();
 					break;
 				case "i" :
-					sqlPlus += "ingredient values (" + item + ")";
-					stmt.executeUpdate(sqlPlus);
-					sqlPlus = sqlBase;
+					sql = "INSERT INTO ingredient (name, description, cost) values (?, ?, ?)";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, itemFields[0]);
+					prepdstmt.setString(2, itemFields[1]);
+					prepdstmt.setDouble(3, Double.parseDouble(itemFields[2]));
+					prepdstmt.executeUpdate();
 					break;
 				case "r" :
-					sqlPlus += "restaurant values (" + item + ")";
-					stmt.executeUpdate(sqlPlus);
-					sqlPlus = sqlBase;
+					sql = "INSERT INTO restaurant (name, location, description) values (?, ?, ?)";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, itemFields[0]);
+					prepdstmt.setString(2, itemFields[1]);
+					prepdstmt.setString(3, itemFields[2]);
+					prepdstmt.executeUpdate();
 					break;
 				case "a" :
-					sqlPlus += "allergy values (" + item + ")";
-					stmt.executeUpdate(sqlPlus);
-					sqlPlus = sqlBase;
+					sql= "INSERT INTO allergy (name, description, tx) values (?, ?, ?)";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, itemFields[0]);
+					prepdstmt.setString(2, itemFields[1]);
+					prepdstmt.setString(3, itemFields[2]);
+					prepdstmt.executeUpdate();
 					break;
 			}
 		} catch (Exception e) {
@@ -165,14 +170,13 @@ public class DatabaseController {
 					" item from another restaurant with the same name, " +
 					"please enter an identifier to the name and enter the " +
 					"information again.");
-			objMngmt.addItem(targetDatabase);
+			e.printStackTrace();
+			objMngmt.addItem(type);
 		}
 	}
 	
 	//  Query tables in psql databases to populate the array list in Object Management
 	public void populateLists() {	
-		String sqlBase = "SELECT * FROM ";
-		String sqlPlus = sqlBase;
 		ResultSet rs;
 		int index = 0;
 		String[] result;
@@ -182,8 +186,8 @@ public class DatabaseController {
 				switch (type) {
 					case "m" :
 						index = 0;
-						sqlPlus += " menuItem";
-						rs = stmt.executeQuery(sqlPlus);
+						sql = "SELECT name, restaurant, menuCategory, description, price, ingredients, size, allergies FROM menuItem";
+						rs = stmt.executeQuery(sql);
 						rs.last();
 						result = new String[rs.getRow()];
 						rs.beforeFirst();
@@ -199,13 +203,12 @@ public class DatabaseController {
 								rs.getString("allergies");
 							index++;		
 						}
-						sqlPlus = sqlBase;
 						objMngmt.makeList(type, result);
 						break;
 					case "i" :
 						index = 0;
-						sqlPlus += " ingredient";
-						rs = stmt.executeQuery(sqlPlus);
+						sql =  "SELECT name, description, cost FROM ingredient";
+						rs = stmt.executeQuery(sql);
 						rs.last();
 						result = new String[rs.getRow()];
 						rs.beforeFirst();
@@ -215,13 +218,12 @@ public class DatabaseController {
 								rs.getDouble("cost");
 							index++;
 						}
-						sqlPlus = sqlBase;
 						objMngmt.makeList(type, result);
 						break;
 					case "r" :
 						index = 0;
-						sqlPlus += " restaurant";
-						rs = stmt.executeQuery(sqlPlus);
+						sql = "SELECT name, location, description FROM restaurant";
+						rs = stmt.executeQuery(sql);
 						rs.last();
 						result = new String[rs.getRow()];
 						rs.beforeFirst();
@@ -231,13 +233,12 @@ public class DatabaseController {
 								rs.getString("description");
 							index++;
 						}
-						sqlPlus = sqlBase;
 						objMngmt.makeList(type, result);
 						break;
 					case "a" :
 						index = 0;
-						sqlPlus += " allergy";
-						rs = stmt.executeQuery(sqlPlus);
+						sql = "SELECT name, description, tx FROM allergy";
+						rs = stmt.executeQuery(sql);
 						rs.last();
 						result = new String[rs.getRow()];
 						rs.beforeFirst();
@@ -247,25 +248,26 @@ public class DatabaseController {
 								rs.getString("tx");
 							index++;
 						}
-						sqlPlus = sqlBase;
 						objMngmt.makeList(type, result);
 						break;
 				}
 			}
 		} catch (SQLException e) {
+			System.out.println("Could not read items from database insert into object");
 			e.printStackTrace();
 		}
 	}
 
-	private String getItem(String type, String name) {
+	private String getItem(String type, String itemName) {
 		String result = "";
 		ResultSet rs;
-		String sqlBase = "SELECT * FROM ";
 		try {
 			switch(type) {
 				case "m" : 
-					sqlBase += "menuitem WHERE NAME = '" + name + "'";
-					rs = stmt.executeQuery(sqlBase);
+					sql = "SELECT * FROM menuitem WHERE NAME = ?";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, itemName);
+					rs = prepdstmt.executeQuery();
 					rs.first();
 					result = rs.getString("name") + "," +
                                                 rs.getString("restaurant") + "," +
@@ -278,24 +280,30 @@ public class DatabaseController {
                                        		rs.getString("allergies");
 					break;
 				case "a" : 
-					sqlBase += "allergy WHERE NAME = '" + name + "'";
-					rs = stmt.executeQuery(sqlBase);
+					sql = "SELECT name, description, tx FROM allergy WHERE NAME = ?";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, itemName);
+					rs = prepdstmt.executeQuery();
 					rs.first();
 					result = rs.getString("name") + "," +
                             	                rs.getString("description") + "," +
 						rs.getString("tx");
 					break;
 				case "i" : 
-					sqlBase += "ingredient WHERE NAME = '" + name + "'";
-					rs = stmt.executeQuery(sqlBase);
+					sql = "SELECT * FROM ingredient WHERE NAME = ?";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, itemName);
+					rs = prepdstmt.executeQuery();
 					rs.first();
 					result = rs.getString("name") + "," +
                             	                rs.getString("description") + "," +
 						rs.getDouble("cost");
 					break;
 				case "r" : 
-					sqlBase += "restaurant WHERE NAME = '" + name + "'";
-					rs = stmt.executeQuery(sqlBase);
+					sql = "SELECT name, location, description FROM restaurant WHERE NAME = ?";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, itemName);
+					rs = prepdstmt.executeQuery();
 					rs.first();
 					result = rs.getString("name") + "," +
 						rs.getString("location") + "," +
@@ -311,34 +319,40 @@ public class DatabaseController {
 	}
 
 	// update item already in database from ojbect string
-	public void updateItem(String targetDatabase,String itemName,String fieldName,String newInfo) {
-		String sqlBase = "UPDATE ";
-		String sqlPlus = sqlBase;
+	public void updateItem(String type, String itemName, String fieldName, String newInfo) {
 		try {
-			switch(targetDatabase) {
+			switch(type) {
 				case "m" :
-					sqlPlus += "menuitem set " + fieldName + "='" + newInfo + 
-						"' where name='" + itemName + "'";
-					stmt.executeUpdate(sqlPlus);
-					sqlPlus = sqlBase;
+					sql = "UPDATE menuitem set ? = ? where name = ?";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, fieldName);
+					prepdstmt.setString(2, newInfo);
+					prepdstmt.setString(3, itemName);
+					prepdstmt.executeUpdate();
 					break;
 				case "i" :
-					sqlPlus += "ingredient set " + fieldName + "='" + newInfo + 
-						"' where name='" + itemName + "'";
-					stmt.executeUpdate(sqlPlus);
-					sqlPlus = sqlBase;
+					sql = "UPDATE ingredient set ? = ? where name = ?";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, fieldName);
+					prepdstmt.setString(2, newInfo);
+					prepdstmt.setString(3, itemName);
+					prepdstmt.executeUpdate();
 					break;
 				case "r" :
-					sqlPlus += "restaurant set " + fieldName + "='" + newInfo + 
-						"' where name='" + itemName + "'";
-					stmt.executeUpdate(sqlPlus);
-					sqlPlus = sqlBase;
+					sql = "UPDATE restaurant set ? = ?  where name = ?";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, fieldName);
+					prepdstmt.setString(2, newInfo);
+					prepdstmt.setString(3, itemName);
+					prepdstmt.executeUpdate();
 					break;
 				case "a" :
-					sqlPlus += "allergy set " + fieldName + "='" + newInfo + 
-						"' where name='" + itemName + "'";
-					stmt.executeUpdate(sqlPlus);
-					sqlPlus = sqlBase;
+					sql = "allergy set ? = ? where name = ?";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, fieldName);
+					prepdstmt.setString(2, newInfo);
+					prepdstmt.setString(3, itemName);
+					prepdstmt.executeUpdate();
 					break;
 			}
 		} catch (Exception e) {
@@ -347,30 +361,32 @@ public class DatabaseController {
 	}
 	
 	// delete item from database
-	public void deleteItem(String targetDatabase, String item) {
-		String sqlBase = "DELETE FROM ";
-		String sqlPlus = sqlBase;
+	public void deleteItem(String type, String itemName) {
 		try {	
-			switch(targetDatabase) {
+			switch(type) {
 				case "m" :
-					sqlPlus += "menuitem where name='" + item + "'";
-					stmt.executeUpdate(sqlPlus);
-					sqlPlus = sqlBase;
+					sql = "DELETE FROM menuitem where name = ?";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, itemName);
+					prepdstmt.executeUpdate();
 					break;
 				case "i" :
-					sqlPlus += "ingredient where name='" + item + "'";
-					stmt.executeUpdate(sqlPlus);
-					sqlPlus = sqlBase;
+					sql = "DELETE FROM ingredient where name = ?";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, itemName);
+					prepdstmt.executeUpdate();
 					break;
 				case "r" :
-					sqlPlus += "restaurant where name='" + item + "'";
-					stmt.executeUpdate(sqlPlus);
-					sqlPlus = sqlBase;
+					sql = "DELETE FROM restaurant where name = ?";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, itemName);
+					prepdstmt.executeUpdate();
 					break;
 				case "a" :
-					sqlPlus += "allergy where name='" + item + "'";
-					stmt.executeUpdate(sqlPlus);
-					sqlPlus = sqlBase;
+					sql = "DELETE FROM allergy where name = ?";
+					prepdstmt = conn.prepareStatement(sql);
+					prepdstmt.setString(1, itemName);
+					prepdstmt.executeUpdate();
 					break;
 			}
 		} catch (Exception e) {
@@ -379,15 +395,15 @@ public class DatabaseController {
 	}
 
 	//receive update information
-	public void updateInfo(String type, String name, Map map) {
+	public void updateInfo(String type, String itemName, Map map) {
 		String info = "";
 		Set<String> keys = map.keySet();
 		for(String k : keys) {
 			if (k.equals("name")) {
-				info = getItem(type,name.replace(","," ").replace(" ", "_"));
+				info = getItem(type, itemName.replace(","," ").replace(" ", "_"));
 				String newInfo = String.valueOf(map.get(k)).replace(","," ").replace(" ","_");
 				newInfo += info.substring(info.indexOf(","), info.length());
-				deleteItem(type,name.replace(","," ").replace(" ", "_"));
+				deleteItem(type, itemName.replace(","," ").replace(" ", "_"));
 				String[] nInfo = newInfo.split(",");
 				String nnInfo ="'";
 				for(int i = 0; i < nInfo.length; i++) {
@@ -428,7 +444,7 @@ public class DatabaseController {
 				}
 				addItem(type,nnInfo);
 			} else {
-				updateItem(type,name.replace(","," ").replace(" ", "_"), k, 
+				updateItem(type,itemName.replace(","," ").replace(" ", "_"), k, 
 						String.valueOf(map.get(k)).replace(","," ").replace(" ", "_"));
 			}	
 		}

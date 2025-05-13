@@ -147,17 +147,19 @@ public class MenuItem implements ObjectMaker {
 	}
 	
 	//other class methods
-	public String menuItemToString() {
+	@Override
+	public String toString() {
 		return getName() + "," + getRestaurant() + "," + getMenuCategory()
 			+ "," + getDescription() + "," + getPrice() 
 			+ "," + getIngredients() + "," + getPreparationStyle() 
 			+ "," + getSize() + "," + getAllergies();
 	}
+	/*
 	@Override
 	public String toSQLString() {
 		return "'" + getName() + "','" + getRestaurant() + "','" + this.getMenuCategory()
 			+ "','" + getDescription() + "'," + getPrice() 
 			+ ",'" + getIngredients() + "','" + getPreparationStyle() 
 			+ "','" + getSize() + "','" + getAllergies() + "'";
-	}
+	}*/
 }

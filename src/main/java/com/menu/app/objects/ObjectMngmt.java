@@ -283,7 +283,7 @@ public class ObjectMngmt {
 			case "m" :
 				for(MenuItem m : menuList) {
 					if(m.getName().equals(name)) {
-						result += (m.menuItemToString());
+						result += (m.toString());
 					}
 				}
 			
@@ -291,21 +291,21 @@ public class ObjectMngmt {
 				for(Allergy a : allergyList) {
 					
 					if(a.getName().equals(name)) {
-						result += a.allergyToString();
+						result += a.toString();
 					}
 				}
 			case "r" :
 				for(Restaurant r : restaurantList) {
 					
 					if(r.getName().equals(name)) {
-						result += r.restaurantToString();
+						result += r.toString();
 					}
 				}
 			case "i" :
 				for(Ingredient i : ingredientList) {
 					
 					if(i.getName().equals(name)) {
-						result += i.ingredientToString();
+						result += i.toString();
 					}
 				}
 		}

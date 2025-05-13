@@ -17,6 +17,6 @@ package com.menu.app;
 
 public interface ObjectMaker {
 		
-	public String toSQLString();
+//	public String toSQLString();
 
 }

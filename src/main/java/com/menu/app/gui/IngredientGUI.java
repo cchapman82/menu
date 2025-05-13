@@ -87,7 +87,7 @@ public class IngredientGUI implements GUIImplementation {
 								ta2.getText().toLowerCase().replace(",", " ").replace(" ", "_"),
      								Double.parseDouble(ta3.getText()));
                 	                        objMngmt.pushToArray("i", ii);
-        	                                objMngmt.pushToDatabase("i", ii.toSQLString());
+        	                                objMngmt.pushToDatabase("i", ii.toString());
 	
                 	               } catch (Exception ec) {
         	                                  JOptionPane.showMessageDialog(f,"Ingredient not entered, please try again");

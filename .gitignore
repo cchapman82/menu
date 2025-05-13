@@ -1,0 +1,7 @@
+########### Do Not Track
+  ### Program
+*.class
+
+  ### Database
+
+*.properties

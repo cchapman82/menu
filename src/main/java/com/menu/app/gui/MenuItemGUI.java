@@ -141,7 +141,7 @@ public class MenuItemGUI implements GUIImplementation {
 								ta8.getText().toLowerCase().replace(",", " ").replace(" ", "_"), 
 								ta9.getText().toLowerCase().replace(",", " ").replace(" ", "_"));
                         	        	objMngmt.pushToArray("m", mi);
-                	        	        objMngmt.pushToDatabase("m", mi.toSQLString());
+                	        	        objMngmt.pushToDatabase("m", mi.toString());
         	        	                objMngmt.updateRestaurant(mi);
 	
 	         	               } catch (Exception ec) {

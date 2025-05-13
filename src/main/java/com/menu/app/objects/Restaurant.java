@@ -92,12 +92,13 @@ public class Restaurant implements ObjectMaker {
 
 
 	//other functions
-	public String restaurantToString() {
+	@Override
+	public String toString() {
 		return getName() + "," + getLocation() + "," + getDescription();
 	}
-
+/*
 	@Override
 	public String toSQLString() {
 		return "'" + getName() + "','" + getLocation() + "','" + getDescription() + "'";
-	}
+	}*/
 }

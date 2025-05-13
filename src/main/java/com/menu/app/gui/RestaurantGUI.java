@@ -83,7 +83,7 @@ public class RestaurantGUI implements GUIImplementation {
                                 	try {
 						Restaurant ri = new Restaurant(ta1.getText().toLowerCase().replace(",", " ").replace(" ", "_"),	ta2.getText().toLowerCase().replace(",", " ").replace(" ", "_"),ta3.getText().toLowerCase().replace(",", " ").replace(" ", "_"));
 						objMngmt.pushToArray("r", ri);
-	                                        objMngmt.pushToDatabase("r", ri.toSQLString());
+	                                        objMngmt.pushToDatabase("r", ri.toString());
 					} catch (Exception ec) {
         	                                  JOptionPane.showMessageDialog(f, "Restaurant not entered, please try again");
 	                               }

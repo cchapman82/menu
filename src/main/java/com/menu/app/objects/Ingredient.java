@@ -63,12 +63,13 @@ public class Ingredient implements ObjectMaker {
 	}
 
 	//other functions
-	public String ingredientToString() {
+	@Override
+	public String toString() {
 		return name  + "," + getDescription() + "," + getCost();
 	}
-
+/*
 	@Override
 	public String toSQLString() {
 		return "'" + name  + "','" + getDescription() + "','" + getCost() + "'";
-	}
+	}*/
 }

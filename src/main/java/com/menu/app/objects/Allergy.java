@@ -62,12 +62,13 @@ public class Allergy implements ObjectMaker {
 	}
 	
 	//object functions
-	public String allergyToString() {
+	@Override
+	public String toString() {
 		return getName() + "," + getDescription() + "," + getTx();
 	}
-
+/*
 	@Override
 	public String toSQLString() {
 		return "'" + getName() + "','" + getDescription() + "','" + getTx() + "'";
-	}
+	}*/
 }

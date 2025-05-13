@@ -77,7 +77,6 @@ public class Main {
 					if(ObjectMngmt.getInstance().checkIfExists(
                                                                 s, item)) {
                                                 //if entered, find item or rename item
-						System.out.println(s + "****************");
                                                 GUIFactory.getGUI("u", s, item);//****
                                         } else {
 						GUIFactory.getGUI("ms", item.toUpperCase() 
@@ -98,7 +97,7 @@ public class Main {
 						GUIFactory.getGUI(s, item);
 								}
 				}
-				GUIFactory.getGUI(".", item);
+				GUIFactory.getGUI("ix", item);
 				break;
 			case "f" :
 				//find item throuth ui
@@ -107,7 +106,7 @@ public class Main {
 			default :
 				//default action is to study
 		//		mc.studyRestaurant(s);
-				GUIFactory.getGUI(".", s);
+				GUIFactory.getGUI("ix", s);
 				break;
 		}
 	}

@@ -87,7 +87,7 @@ public class AllergyGUI implements GUIImplementation {
 								ta2.getText().toLowerCase().replace(",", " ").replace(" ", "_"),
 								ta3.getText().toLowerCase().replace(",", " ").replace(" ", "_"));
                 	                        objMngmt.pushToArray("a", ai);
-        	                                objMngmt.pushToDatabase("a", ai.toSQLString());
+        	                                objMngmt.pushToDatabase("a", ai.toString());
 	
                 	               } catch (Exception ec) {
         	                                  JOptionPane.showMessageDialog(f,"Allergy not entered, please try again");
