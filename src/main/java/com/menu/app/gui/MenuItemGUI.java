@@ -105,19 +105,24 @@ public class MenuItemGUI implements GUIImplementation {
                 bb.setBounds(100, 430, 100, 30);
                 bb.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                                GUIFactory.getGUI(".", "");
+                                //GUIFactory.getGUI(".", "");
+				Main.setOption(".");	
                                 f.dispose();
                         }
                 });
 
+		//if item is incorrect
 		JLabel jl10 = new JLabel();
 		jl10.setBounds(200, 470, 200, 30);
 		f.add(jl10);
 
+
+		//add item
 		JButton b = new JButton("Submit");
 		b.setBounds(220, 430, 100, 30);
 		b.addActionListener(new ActionListener() {
                 	public void actionPerformed(ActionEvent e) {
+				//check to make sure information is correct
 				int option = JOptionPane.showConfirmDialog(f, "Is this information" +
 				      " correct?\n\t" + jl1.getText() + ": " + ta1.getText() + "\n\t" +
 				      jl2.getText() + ": " + ta2.getText() + "\n\t" + 
@@ -129,26 +134,30 @@ public class MenuItemGUI implements GUIImplementation {
 				      jl8.getText() + ": " + ta8.getText() + "\n\t" +
 				      jl9.getText() + ": " + ta9.getText());
 				if(option == 0) {
+					//correct information
                         		try {
 						MenuItem mi = new MenuItem(
-								ta1.getText().toLowerCase().replace(",", " ").replace(" ", "_"), 
-								ta2.getText().toLowerCase().replace(",", " ").replace(" ", "_"),
-								ta3.getText().toLowerCase().replace(",", " ").replace(" ", "_"),
-								ta4.getText().toLowerCase().replace(",", " ").replace(" ", "_"), 
-								Double.parseDouble(ta5.getText()),
-								ta6.getText().toLowerCase().replace(",", " ").replace(" ", "_"), 
-								ta7.getText().toLowerCase().replace(",", " ").replace(" ", "_"), 
-								ta8.getText().toLowerCase().replace(",", " ").replace(" ", "_"), 
-								ta9.getText().toLowerCase().replace(",", " ").replace(" ", "_"));
+							ta1.getText().toLowerCase().replace(",", " "), 
+							ta2.getText().toLowerCase().replace(",", " "),
+							ta3.getText().toLowerCase().replace(",", " "),
+							ta4.getText().toLowerCase().replace(",", " "), 
+							Double.parseDouble(ta5.getText()),
+							ta6.getText().toLowerCase().replace(",", " "), 
+							ta7.getText().toLowerCase().replace(",", " "), 
+							ta8.getText().toLowerCase().replace(",", " "), 
+							ta9.getText().toLowerCase().replace(",", " "));
                         	        	objMngmt.pushToArray("m", mi);
                 	        	        objMngmt.pushToDatabase("m", mi.toString());
         	        	                objMngmt.updateRestaurant(mi);
 	
-	         	               } catch (Exception ec) {
- 	                                	  JOptionPane.showMessageDialog(f, "Menu Item not entered, please try again");
+	         	               	} catch (Exception ec) {
+ 	                                	JOptionPane.showMessageDialog(f, 
+							"Menu Item not entered, please try again");
 			       		}
+				//incorrect informaiton
 				} else if(option == 1) {
 					jl10.setText("Plese re-enter the information");
+				//cancel??????????????????????????????????????????
 				} else if(option == 2) {
 					Main.setOption(".");
 				}

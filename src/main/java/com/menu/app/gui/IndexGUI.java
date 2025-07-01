@@ -52,11 +52,7 @@ public class IndexGUI implements GUIImplementation {
 	b1.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			try {
-				String type = 
-				    JOptionPane.showInputDialog(f, 
-				      "Please enter type of item to enter--" +
-                                      "\nm for Menu Item \nr for Restaurant\n" +
-                                      "i for Ingredient \na for Allergy");
+				String type = getType(f);
 				f.dispose();
 				Main.setOption(type);
 			} catch (Exception ec) {
@@ -72,14 +68,11 @@ public class IndexGUI implements GUIImplementation {
 	b2.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 			try {
-				String type = 
-				    JOptionPane.showInputDialog(f, 
-				      "Please enter type of item to update--" +
-                                      "\nm for Menu Item \nr for Restaurant\n" +
-                                      "i for Ingredient \na for Allergy");
+				String type = getType(f);
+			       String item = JOptionPane.showInputDialog("Please enter name of item "
+					       + "to update");
 				f.dispose();
-
-				Main.setOption(type + "u:");
+				Main.updateItem(type, item);
 			} catch (Exception ec) {
 				l3.setText("Action not preformed, try again");
 			}
@@ -102,13 +95,11 @@ public class IndexGUI implements GUIImplementation {
 					l3.setText("No restaurant entered " +
 							"Please try again");
 				} else if (ObjectMngmt.checkIfExists("r", name.
-							toLowerCase().
-							replace(" ", "_"))) {
-					Main.setOption(name.toLowerCase().replace(" ", "_"));
+							toLowerCase())) {
+					Main.setOption(name.toLowerCase());
 					f.dispose();
 				} else if (ObjectMngmt.checkIfExists("r", name.
-							toLowerCase().
-							replace(" ", "_")).
+							toLowerCase()).
 							equals(false)) {
 					Main.setOption("f:r");
 
@@ -120,10 +111,7 @@ public class IndexGUI implements GUIImplementation {
 			}
                 }
         });
-
 	f.add(b3);
-
-
 	JButton b4 = new JButton("Close");
 	b4.setBounds(50, 250, 200, 30);
 	b4.addActionListener(new ActionListener() {
@@ -131,15 +119,33 @@ public class IndexGUI implements GUIImplementation {
 			System.exit(1);
                 }
         });
-
 	f.add(b4);
-
-
 	f.setSize(500, 400);
 	f.setLayout(null);
 	f.setVisible(true);
 	f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+	}
 
-		
+	private String getType(JFrame f) {
+		String[] items = {"Menu Item", "Restaurant", "Ingredient", "Allergy"};
+		String type =  (String) JOptionPane.showInputDialog(f, 
+				      "Please enter type of item to enter--", "Items to Choose",
+				      JOptionPane.PLAIN_MESSAGE,
+				      null, items, items[0]);
+		switch(type) {
+			case "Menu Item" :
+				type = "m";
+				break;
+			case "Restaurant" :
+				type = "r";
+				break;
+			case "Ingredient" :
+				type = "i";
+				break;
+			case "Allergy" :
+				type = "a";
+				break;
+		}
+		return type;
 	}
 }

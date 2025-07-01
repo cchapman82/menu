@@ -67,9 +67,4 @@ public class Ingredient implements ObjectMaker {
 	public String toString() {
 		return name  + "," + getDescription() + "," + getCost();
 	}
-/*
-	@Override
-	public String toSQLString() {
-		return "'" + name  + "','" + getDescription() + "','" + getCost() + "'";
-	}*/
 }

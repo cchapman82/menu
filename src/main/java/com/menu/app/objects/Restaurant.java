@@ -96,9 +96,4 @@ public class Restaurant implements ObjectMaker {
 	public String toString() {
 		return getName() + "," + getLocation() + "," + getDescription();
 	}
-/*
-	@Override
-	public String toSQLString() {
-		return "'" + getName() + "','" + getLocation() + "','" + getDescription() + "'";
-	}*/
 }

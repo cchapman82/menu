@@ -186,7 +186,7 @@ public class DatabaseController {
 				switch (type) {
 					case "m" :
 						index = 0;
-						sql = "SELECT name, restaurant, menuCategory, description, price, ingredients, size, allergies FROM menuItem";
+						sql = "SELECT name, restaurant, menuCategory, description, price, ingredients, preparationstyle, size, allergies FROM menuItem";
 						rs = stmt.executeQuery(sql);
 						rs.last();
 						result = new String[rs.getRow()];
@@ -198,7 +198,7 @@ public class DatabaseController {
 								rs.getString("description") + "," +
 								rs.getDouble("price") + "," +
 								rs.getString("ingredients") + "," +
-								rs.getString("preparationStyle")+"," +
+								rs.getString("preparationstyle")+"," +
 								rs.getString("size") + "," +
 								rs.getString("allergies");
 							index++;		
@@ -321,37 +321,46 @@ public class DatabaseController {
 	// update item already in database from ojbect string
 	public void updateItem(String type, String itemName, String fieldName, String newInfo) {
 		try {
+			System.out.println(itemName + " " + fieldName + " " + newInfo);
 			switch(type) {
 				case "m" :
-					sql = "UPDATE menuitem set ? = ? where name = ?";
+					sql = "UPDATE menuitem set " + fieldName + " = ? where name = ?";
 					prepdstmt = conn.prepareStatement(sql);
-					prepdstmt.setString(1, fieldName);
-					prepdstmt.setString(2, newInfo);
-					prepdstmt.setString(3, itemName);
+					if (fieldName.equals("price")) {
+						Double price = Double.parseDouble(newInfo);
+						prepdstmt.setDouble(1, price);
+						prepdstmt.setString(2, itemName);
+					} else {
+						prepdstmt.setString(1, newInfo);
+						prepdstmt.setString(2, itemName);
+					}
 					prepdstmt.executeUpdate();
 					break;
 				case "i" :
-					sql = "UPDATE ingredient set ? = ? where name = ?";
+					sql = "UPDATE ingredient set " + fieldName + " = ? where name = ?";
 					prepdstmt = conn.prepareStatement(sql);
-					prepdstmt.setString(1, fieldName);
-					prepdstmt.setString(2, newInfo);
-					prepdstmt.setString(3, itemName);
+					if (fieldName.equals("cost")) {
+						Double cost = Double.parseDouble(newInfo);
+						prepdstmt.setDouble(1, cost);
+						prepdstmt.setString(2, itemName);
+					} else {
+						prepdstmt.setString(1, newInfo);
+						prepdstmt.setString(2, itemName);
+					}
 					prepdstmt.executeUpdate();
 					break;
 				case "r" :
-					sql = "UPDATE restaurant set ? = ?  where name = ?";
+					sql = "UPDATE restaurant set " + fieldName + "  = ?  where name = ?";
 					prepdstmt = conn.prepareStatement(sql);
-					prepdstmt.setString(1, fieldName);
-					prepdstmt.setString(2, newInfo);
-					prepdstmt.setString(3, itemName);
+					prepdstmt.setString(1, newInfo);
+					prepdstmt.setString(2, itemName);
 					prepdstmt.executeUpdate();
 					break;
 				case "a" :
-					sql = "allergy set ? = ? where name = ?";
+					sql = "allergy set " + fieldName + " = ? where name = ?";
 					prepdstmt = conn.prepareStatement(sql);
-					prepdstmt.setString(1, fieldName);
-					prepdstmt.setString(2, newInfo);
-					prepdstmt.setString(3, itemName);
+					prepdstmt.setString(1, newInfo);
+					prepdstmt.setString(2, itemName);
 					prepdstmt.executeUpdate();
 					break;
 			}
@@ -400,10 +409,10 @@ public class DatabaseController {
 		Set<String> keys = map.keySet();
 		for(String k : keys) {
 			if (k.equals("name")) {
-				info = getItem(type, itemName.replace(","," ").replace(" ", "_"));
-				String newInfo = String.valueOf(map.get(k)).replace(","," ").replace(" ","_");
+				info = getItem(type, itemName.replace(","," ")/*.replace(" ", "_")*/);
+				String newInfo = String.valueOf(map.get(k)).replace(","," ")/*.replace(" ","_")*/;
 				newInfo += info.substring(info.indexOf(","), info.length());
-				deleteItem(type, itemName.replace(","," ").replace(" ", "_"));
+				deleteItem(type, itemName.replace(","," ")/*.replace(" ", "_")*/);
 				String[] nInfo = newInfo.split(",");
 				String nnInfo ="'";
 				for(int i = 0; i < nInfo.length; i++) {
@@ -444,8 +453,8 @@ public class DatabaseController {
 				}
 				addItem(type,nnInfo);
 			} else {
-				updateItem(type,itemName.replace(","," ").replace(" ", "_"), k, 
-						String.valueOf(map.get(k)).replace(","," ").replace(" ", "_"));
+				updateItem(type,itemName/*.replace(","," ").replace(" ", "_")*/, k, 
+						String.valueOf(map.get(k))/*.replace(","," ").replace(" ", "_")*/);
 			}	
 		}
 		ObjectMngmt.getInstance().updateLists();

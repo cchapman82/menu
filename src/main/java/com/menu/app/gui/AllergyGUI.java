@@ -83,14 +83,15 @@ public class AllergyGUI implements GUIImplementation {
 			       if(option == 0) {	
         	                        try {
 	                                        Allergy ai  = new Allergy(
-								ta1.getText().toLowerCase().replace(",", " ").replace(" ", "_"), 
-								ta2.getText().toLowerCase().replace(",", " ").replace(" ", "_"),
-								ta3.getText().toLowerCase().replace(",", " ").replace(" ", "_"));
+							ta1.getText().toLowerCase().replace(",", " "), 
+							ta2.getText().toLowerCase().replace(",", " "),
+							ta3.getText().toLowerCase().replace(",", " "));
                 	                        objMngmt.pushToArray("a", ai);
         	                                objMngmt.pushToDatabase("a", ai.toString());
 	
                 	               } catch (Exception ec) {
-        	                                  JOptionPane.showMessageDialog(f,"Allergy not entered, please try again");
+        	                                  JOptionPane.showMessageDialog(f,
+							"Allergy not entered, please try again");
 	                               }
 			       } else if(option == 1) {
 					jl4.setText("Please re-enter information");

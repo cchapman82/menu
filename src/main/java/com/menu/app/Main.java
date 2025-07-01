@@ -47,7 +47,6 @@ public class Main {
 		String item = "";
 		Boolean update = false;
 		s = s.toLowerCase();
-		s.replace(" ", "_");
 		//separate the type(s) and item, and if to update item(u)
 		if (s.contains(":")) {
 			item = s.substring(s.indexOf(":") + 1, s.length());
@@ -61,53 +60,48 @@ public class Main {
 		switch(s) {
 			//back to index ui
 			case "." :
+				GUIFactory.getGUI("ix", "Home");
 				break;
 			// do the same thing for all of these options
 			case "a" :
 			case "i" :
 			case "r" :
 			case "m" : 
-				//if no item specified, get item name
-				if (item.equals("")) {
-					item = JOptionPane.showInputDialog(
-						"Please enter name of item");
-				}
-				//if item needs to update
-				if (update) {
-					if(ObjectMngmt.getInstance().checkIfExists(
-                                                                s, item)) {
-                                                //if entered, find item or rename item
-                                                GUIFactory.getGUI("u", s, item);//****
-                                        } else {
-						GUIFactory.getGUI("ms", item.toUpperCase() 
-								+ "  not found not entered");
-					}
-				} else {
-					//check if item is already entered
-					if(ObjectMngmt.getInstance().checkIfExists(
-								s, item)) {
-						if(s.equals("m")) {
-							GUIFactory.getGUI("mc", item);
-						} else {
-							//if entered, find item or rename item
-							GUIFactory.getGUI("f", s, item);
-						}
+				//get item name
+				item = JOptionPane.showInputDialog("Please enter name of item");
+				if(ObjectMngmt.getInstance().checkIfExists(s, item)) {
+					if(s.equals("m")) {
+						setOption("mc", item);
 					} else {
-						//if not entered, continue to adding
-						GUIFactory.getGUI(s, item);
-								}
+						//if entered, find item or rename item
+						GUIFactory.getGUI("f", s, item);
+					} 
+				} else {
+					//if not entered, continue to adding
+					setOption(s, item);
 				}
-				GUIFactory.getGUI("ix", item);
+				setOption(".");
 				break;
 			case "f" :
 				//find item throuth ui
 				GUIFactory.getGUI(s, "r", item);
 				break;
-			default :
-				//default action is to study
-		//		mc.studyRestaurant(s);
-				GUIFactory.getGUI("ix", s);
-				break;
 		}
 	}
+	
+	public static void setOption(String type, String item) {
+		GUIFactory.getGUI(type, item);
+	}
+
+	public static void updateItem(String type, String item) {
+		if(ObjectMngmt.getInstance().checkIfExists(type, item)) {
+                        //if entered, find item or rename item
+                	GUIFactory.getGUI("u", type, item);
+                } else {
+			setOption("ms", item.toUpperCase() 
+				+ "  not found not entered");
+		}
+
+	}
+
 }
