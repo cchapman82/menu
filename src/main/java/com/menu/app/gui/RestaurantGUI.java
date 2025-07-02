@@ -54,8 +54,9 @@ public class RestaurantGUI implements GUIImplementation {
                 JLabel jl3 = new JLabel("Description :");
                 jl3.setBounds(50, 100, 400, 30);
                 f.add(jl3);
-                JTextField ta3 = new JTextField();
+                JTextArea ta3 = new JTextArea();
                 ta3.setBounds(200, 100, 250, 60);
+		ta3.setLineWrap(true);
                 f.add(ta3);
 
 		JButton bb = new JButton("To Home");
@@ -81,7 +82,7 @@ public class RestaurantGUI implements GUIImplementation {
 				      jl3.getText() + ": " + ta3.getText());
 			       if(option == 0) {	
                                 	try {
-						Restaurant ri = new Restaurant(ta1.getText().toLowerCase().replace(",", " ")/*.replace(" ", "_")*/,	ta2.getText().toLowerCase().replace(",", " ")/*.replace(" ", "_")*/,ta3.getText().toLowerCase().replace(",", " ")/*.replace(" ", "_")*/);
+						Restaurant ri = new Restaurant(ta1.getText().toLowerCase().replace(",", " "), ta2.getText().toLowerCase().replace(",", " "), ta3.getText().toLowerCase().replace(",", " "));
 						objMngmt.pushToArray("r", ri);
 	                                        objMngmt.pushToDatabase("r", ri.toString());
 					} catch (Exception ec) {

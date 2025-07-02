@@ -62,8 +62,9 @@ public class MenuItemGUI implements GUIImplementation {
 		JLabel jl4 = new JLabel("Description : ");
 		jl4.setBounds(50, 130, 400, 30);
 		f.add(jl4);
-		JTextField ta4 = new JTextField();
+		JTextArea ta4 = new JTextArea();
 		ta4.setBounds(200, 130, 250, 60);
+		ta4.setLineWrap(true);
 		f.add(ta4);
 
 		JLabel jl5 = new JLabel("Price : ");
@@ -76,8 +77,9 @@ public class MenuItemGUI implements GUIImplementation {
 		JLabel jl6 = new JLabel("Ingredients : ");
 		jl6.setBounds(50, 220, 400, 30);
 		f.add(jl6);
-		JTextField ta6 = new JTextField();
+		JTextArea ta6 = new JTextArea();
 		ta6.setBounds(200, 220, 250, 90);
+		ta6.setLineWrap(true);
 		f.add(ta6);
 
 		JLabel jl7 = new JLabel("Preparation Style : ");
@@ -105,7 +107,6 @@ public class MenuItemGUI implements GUIImplementation {
                 bb.setBounds(100, 430, 100, 30);
                 bb.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                                //GUIFactory.getGUI(".", "");
 				Main.setOption(".");	
                                 f.dispose();
                         }

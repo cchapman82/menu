@@ -29,8 +29,6 @@ public class GUIFactory {
 				return new StudyGUI(name);
 			case "mc" :
 				return new MICollisionGUI(name);
-			case "ms" :
-				return new MessageGUI(name);
 			default :
 				return new IndexGUI();
 		}
@@ -52,6 +50,8 @@ public class GUIFactory {
 					case "r" :
 						return new UpdateRGUI(type, name);
 				}
+			case "d" :
+				return new DisplayGUI(type, name);
 			default :
 				return new IndexGUI();
 		}

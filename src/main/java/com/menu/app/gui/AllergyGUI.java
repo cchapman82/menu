@@ -48,8 +48,9 @@ public class AllergyGUI implements GUIImplementation {
                 JLabel jl2 = new JLabel("Description : ");
                 jl2.setBounds(50, 70, 100, 30);
                 f.add(jl2);
-                JTextField ta2 = new JTextField();
+                JTextArea ta2 = new JTextArea();
                 ta2.setBounds(200, 70, 250, 60);
+		ta2.setLineWrap(true);
                 f.add(ta2);
 
                 JLabel jl3 = new JLabel("Treatment :");

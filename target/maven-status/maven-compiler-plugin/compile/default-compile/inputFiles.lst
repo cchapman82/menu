@@ -7,7 +7,6 @@
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/objects/Ingredient.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/UpdateMIGUI.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/IngredientGUI.java
-/home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/MessageGUI.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/database/DatabaseController.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/IndexGUI.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/objects/ObjectMngmt.java
@@ -24,3 +23,4 @@
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/MICollisionGUI.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/StudyGUI.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/objects/MenuItem.java
+/home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/DisplayGUI.java

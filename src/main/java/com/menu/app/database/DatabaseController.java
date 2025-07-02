@@ -127,7 +127,7 @@ public class DatabaseController {
 			switch(type) {
 				case "m" :
 					System.out.println(item);
-					sql = "INSERT INTO menuitem (name, restaurant, menuCategory, description, price, ingredients, size, allergies) values (?, ?, ?, ?, ?, ?, ?, ?)";
+					sql = "INSERT INTO menuitem (name, restaurant, menuCategory, description, price, ingredients, preparationstyle, size, allergies) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 					prepdstmt = conn.prepareStatement(sql);
 					prepdstmt.setString(1, itemFields[0]);
@@ -138,6 +138,7 @@ public class DatabaseController {
 					prepdstmt.setString(6, itemFields[5]);
 					prepdstmt.setString(7, itemFields[6]);
 					prepdstmt.setString(8, itemFields[7]);
+					prepdstmt.setString(9, itemFields[8]);
 					prepdstmt.executeUpdate();
 					break;
 				case "i" :

@@ -96,12 +96,12 @@ public class IndexGUI implements GUIImplementation {
 							"Please try again");
 				} else if (ObjectMngmt.checkIfExists("r", name.
 							toLowerCase())) {
-					Main.setOption(name.toLowerCase());
+					Main.getItem("r", name.toLowerCase());
 					f.dispose();
 				} else if (ObjectMngmt.checkIfExists("r", name.
 							toLowerCase()).
 							equals(false)) {
-					Main.setOption("f:r");
+					Main.findItems("r", name);
 
 					f.dispose();	
 				}
@@ -112,14 +112,28 @@ public class IndexGUI implements GUIImplementation {
                 }
         });
 	f.add(b3);
-	JButton b4 = new JButton("Close");
+
+	JButton b4 = new JButton("Display Item");
 	b4.setBounds(50, 250, 200, 30);
 	b4.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			String type = getType(f);
+			name = JOptionPane.showInputDialog(f,
+                                      "Please enter item to display");
+
+			Main.getItem(type, name);
+			f.dispose();
+		}
+	});
+	f.add(b4);
+	JButton b5 = new JButton("Close");
+	b5.setBounds(50, 310, 200, 30);
+	b5.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 			System.exit(1);
                 }
         });
-	f.add(b4);
+	f.add(b5);
 	f.setSize(500, 400);
 	f.setLayout(null);
 	f.setVisible(true);

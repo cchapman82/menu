@@ -13,11 +13,11 @@ import javax.swing.*;
 import java.awt.event.*;
 
 
-public class MessageGUI implements GUIImplementation {
+public class DisplayGUI implements GUIImplementation {
 
-	MessageGUI(String message) {
+	DisplayGUI(String type, String name) {
 	
-        	JFrame f = new JFrame("Restaurant Message");
+        	JFrame f = new JFrame("Item Display");
 
 
 	        JMenuBar mb = new JMenuBar();
@@ -28,16 +28,17 @@ public class MessageGUI implements GUIImplementation {
                         	System.exit(1);
                 	}
         	});
-		JTextArea ta = new JTextArea(message);
-		ta.setBounds(10, 10, 200, 30);
-		f.add(ta);
+		String item = ObjectMngmt.getInstance().getObjectString(type, name);
+		JLabel l = new JLabel("<html>" + item + "<html>");
+		l.setBounds(10, 10, 200, 300);
+		f.add(l);
 		
 		JButton b = new JButton("To Home");
 		b.setBounds(250, 400, 100, 30);
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GUIFactory.getGUI("f", "");
 				f.dispose();
+				Main.setOption(".");
 			}
 		});
 		f.add(b);

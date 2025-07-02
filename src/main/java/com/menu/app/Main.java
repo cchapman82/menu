@@ -39,25 +39,15 @@ public class Main {
 	//start up activities and get initial ui
 	public static void main( String[] args) {
 		mc.openApp();
-		GUIFactory.getGUI("ix", "Home");
+		setOption(".");
 	}
 	
 	// separated to insure upgrades and consistent formatting
-	public static void setOption(String s) {
+	public static void setOption(String type) {
 		String item = "";
-		Boolean update = false;
-		s = s.toLowerCase();
-		//separate the type(s) and item, and if to update item(u)
-		if (s.contains(":")) {
-			item = s.substring(s.indexOf(":") + 1, s.length());
-			s = s.substring(0, s.indexOf(":"));
-			if (s.contains("u")) {
-				update = true;
-				s = s.substring(0, s.indexOf("u"));
-			}
-		}
+		type = type.toLowerCase();
 		//based on type of item
-		switch(s) {
+		switch(type) {
 			//back to index ui
 			case "." :
 				GUIFactory.getGUI("ix", "Home");
@@ -69,23 +59,21 @@ public class Main {
 			case "m" : 
 				//get item name
 				item = JOptionPane.showInputDialog("Please enter name of item");
-				if(ObjectMngmt.getInstance().checkIfExists(s, item)) {
-					if(s.equals("m")) {
+				if(ObjectMngmt.getInstance().checkIfExists(type, item)) {
+					if(type.equals("m")) {
 						setOption("mc", item);
 					} else {
 						//if entered, find item or rename item
-						GUIFactory.getGUI("f", s, item);
+						JOptionPane.showMessageDialog(new JFrame(), item + " already entered");
 					} 
 				} else {
 					//if not entered, continue to adding
-					setOption(s, item);
+					setOption(type, item);
 				}
 				setOption(".");
 				break;
-			case "f" :
-				//find item throuth ui
-				GUIFactory.getGUI(s, "r", item);
-				break;
+			default :
+				setOption(".");
 		}
 	}
 	
@@ -98,10 +86,37 @@ public class Main {
                         //if entered, find item or rename item
                 	GUIFactory.getGUI("u", type, item);
                 } else {
-			setOption("ms", item.toUpperCase() 
-				+ "  not found not entered");
+			JOptionPane.showMessageDialog(new JFrame(), item.toUpperCase() 
+				+ "  not entered, enter item into system.");
+			setOption(".");
 		}
 
+	}
+	public static void getItem(String type, String item) {
+		if(ObjectMngmt.getInstance().checkIfExists(type, item.toLowerCase())) {
+			switch(type) {
+				case "m" :
+				case "i" :
+				case "a" :
+				       GUIFactory.getGUI("d", type, item);
+				       break;
+				case "r" :
+				       GUIFactory.getGUI("s", item);
+				       break;
+				default :
+				       	setOption(".");
+					break;
+			}
+		} else {
+			JOptionPane.showMessageDialog(new JFrame("Item Missing"), item + 
+					" not entered, enter item into system.");
+			setOption(".");
+		}
+
+	}
+	//list of items by button for study or display
+	public static void findItems(String type, String item) {
+		GUIFactory.getGUI("f", type, item);
 	}
 
 }

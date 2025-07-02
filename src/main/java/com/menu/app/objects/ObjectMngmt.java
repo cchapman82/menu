@@ -207,30 +207,38 @@ public class ObjectMngmt {
 		Boolean result = false;
 		switch(type) {
 			case "m" :
-				for (MenuItem mi : menuList) {
-					if (mi.getName().equals(name)) {
-						result = true;
+				if(menuList.size() != 0) {
+					for (MenuItem mi : menuList) {
+						if (mi.getName().equals(name)) {
+							result = true;
+						}
 					}
 				}
 				break;
 			case "r" :
-				for (Restaurant ri : restaurantList) {
-					if (ri.getName().equals(name)) {
-						result = true;
+				if(restaurantList.size() != 0) {
+					for (Restaurant ri : restaurantList) {
+						if (ri.getName().equals(name)) {
+							result = true;
+						}
 					}
 				}
 				break;
 			case "i" :
-				for (Ingredient ii : ingredientList) {
-					if (ii.getName().equals(name)) {
-						result = true;
+				if(ingredientList.size() != 0) {
+					for (Ingredient ii : ingredientList) {
+						if (ii.getName().equals(name)) {
+							result = true;
+						}
 					}
 				}
 				break;
 			case "a" :
-				for (Allergy ai : allergyList) {
-					if (ai.getName().equals(name)) {
-						result = true;
+				if(allergyList.size() != 0) {
+					for (Allergy ai : allergyList) {
+						if (ai.getName().equals(name)) {
+							result = true;
+						}
 					}
 				}
 				break;
@@ -241,40 +249,48 @@ public class ObjectMngmt {
 	// get restaurant from list
 	public String getRestaurantList() {
 		String result = "";
-		for (Restaurant r : restaurantList) {
-			result += r.getName() + "\n";
+		if(restaurantList.size() != 0) {
+			for (Restaurant r : restaurantList) {
+				result += r.getName() + "\n";
+			}
+			result = result.substring(0, result.lastIndexOf("\n"));
 		}
-		result = result.substring(0, result.lastIndexOf("\n"));
 		return result;
 	}
 
 	// get Menu Item based on restaurant associated with
 	public String getMenuList(String restaurant) {
 		String result = "";
-		for (MenuItem m : menuList) {
-			if (m.getRestaurant().equals(restaurant)) { 
-				result += m.getName() + "\n";
+		if(menuList.size() != 0) {
+			for (MenuItem m : menuList) {
+				if (m.getRestaurant().equals(restaurant)) { 
+					result += m.getName() + "\n";
+				}
 			}
+			result = result.substring(0, result.lastIndexOf("\n"));
 		}
-		result = result.substring(0, result.lastIndexOf("\n"));
 		return result;
 	}
 	// get Menu Item based on restaurant associated with
 	public String getIngredientList() {
 		String result = "";
-		for (Ingredient i : ingredientList) {
-			result += i.getName() + "\n";
+		if(ingredientList.size() != 0) {
+			for (Ingredient i : ingredientList) {
+				result += i.getName() + "\n";
+			}
+			result = result.substring(0, result.lastIndexOf("\n"));
 		}
-		result = result.substring(0, result.lastIndexOf("\n"));
 		return result;
 	}
 	// get Menu Item based on restaurant associated with
 	public String getAllergyList() {
 		String result = "";
-		for (Allergy a : allergyList) {
-			result += a.getName() + "\n";
+		if(allergyList.size() != 0) {
+			for (Allergy a : allergyList) {
+				result += a.getName() + "\n";
+			}
+			result = result.substring(0, result.lastIndexOf("\n"));
 		}
-		result = result.substring(0, result.lastIndexOf("\n"));
 		return result;
 	}
 	public String getObjectString(String type, String name) {

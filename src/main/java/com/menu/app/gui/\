@@ -22,12 +22,19 @@ public class FindGUI implements GUIImplementation {
 		switch(type) {
 			case "r" :
 				list = ObjectMngmt.getInstance().getRestaurantList();
+				type = "Restaurant";
 				break;
+/*			case "m" :
+				list = ObjectMngmt.getInstance().getMenuList(name);
+				type = "Menu Item";
+				break;*/
 			case "a" :
 				list = ObjectMngmt.getInstance().getAllergyList();
+				type = "Allergy";
 				break;
 			case "i" :
 				list = ObjectMngmt.getInstance().getIngredientList();
+				type = "Ingredient";
 				break;
 			default :
 				break;
@@ -52,40 +59,39 @@ public class FindGUI implements GUIImplementation {
 		int yAxis = 80;
                 int xAxis = 70;
 
-        //	JFrame ff = new JFrame(name + " Already entered");
-       		f.setJMenuBar(mb);
-		JLabel l1 = new JLabel("<html>" + name + " not entered Please choose from options below or home to go back to main menu<html>");
+        	JFrame ff = new JFrame(type + " Already entered");
+       		ff.setJMenuBar(mb);
+		JLabel l1 = new JLabel("<html>" + name + " Already entered Please choose from options below or home to go back to main menu<html>");
 		l1.setBounds(50, 10, 400, 60);
-		f.add(l1);
+		ff.add(l1);
                 for (int i = 0; i < rs.length; i++) {
    	                JButton bb = new JButton(rs[i]);
                         bb.setBounds(xAxis, yAxis, 100, 30);
                         bb.addActionListener(new ActionListener() {
                              	public void actionPerformed(ActionEvent e3) {
-                                   	Main.getItem(ftype, bb.getText());
-					f.dispose();
+                                   	Main.getItem(bb.getText());
                                 }
                     	});
                         yAxis += 50;
                         if ((i%3 == 0) && (i > 3)) {
                            	xAxis += 40;
                         }
-                        f.add(bb);
+                        ff.add(bb);
 		}
 		JButton b = new JButton("To Home");
                 b.setBounds(250, 400, 100, 30);
                 b.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                                 Main.setOption(".");
-                                f.dispose();
+                                ff.dispose();
                         }
                 });
-		f.add(b);
+		ff.add(b);
 
 
-		f.setSize(600, 530);
-		f.setLayout(null);
-		f.setVisible(true);
-		f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		ff.setSize(600, 530);
+		ff.setLayout(null);
+		ff.setVisible(true);
+		ff.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	}
 }

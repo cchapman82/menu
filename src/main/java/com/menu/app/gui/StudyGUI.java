@@ -41,7 +41,6 @@ public class StudyGUI implements GUIImplementation {
 				" categories");
 		t2.setBounds(10, 40, 300, 30);
 		f.add(t2);
-		System.out.println("---" + menuCategories);
 
 		JTextArea tA1 = new JTextArea(menuCategories);
 		tA1.setBounds(10, 80, 300, 30);
