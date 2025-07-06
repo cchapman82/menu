@@ -107,9 +107,9 @@ public class DatabaseController {
 					"name varchar, description varchar, tx varchar)";
 			stmt.executeUpdate(sql);
 			sql = "CREATE TABLE IF NOT EXISTS menuItem (id serial primary key, " +
-					"name varchar, restaurant varchar, category varchar, description" +
+					"name varchar, restaurant varchar, menuCategory varchar, description" +
 			     " varchar, price float, ingredients varchar, " +
-			     "preparation varchar, size varchar, allergies varchar)";
+			     "preparationStyle varchar, size varchar, allergies varchar)";
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
 			System.out.println("Tables not created or accessable");
@@ -187,7 +187,7 @@ public class DatabaseController {
 				switch (type) {
 					case "m" :
 						index = 0;
-						sql = "SELECT name, restaurant, category, description, price, ingredients, preparation, size, allergies FROM menuItem";
+						sql = "SELECT name, restaurant, menuCategory, description, price, ingredients, preparationstyle, size, allergies FROM menuItem";
 						rs = stmt.executeQuery(sql);
 						rs.last();
 						result = new String[rs.getRow()];
@@ -195,11 +195,11 @@ public class DatabaseController {
 						while(rs.next()) {
 							result[index] = rs.getString("name") + "," +
 								rs.getString("restaurant") + "," +
-								rs.getString("category") + "," +
+								rs.getString("menuCategory") + "," +
 								rs.getString("description") + "," +
 								rs.getDouble("price") + "," +
 								rs.getString("ingredients") + "," +
-								rs.getString("preparation")+"," +
+								rs.getString("preparationstyle")+"," +
 								rs.getString("size") + "," +
 								rs.getString("allergies");
 							index++;		
@@ -272,11 +272,11 @@ public class DatabaseController {
 					rs.first();
 					result = rs.getString("name") + "," +
                                                 rs.getString("restaurant") + "," +
-                                              	rs.getString("category") + "," +
+                                              	rs.getString("menuCategory") + "," +
                             	                rs.getString("description") + "," +
        		                                rs.getDouble("price") + "," + 
  						rs.getString("ingredients") + "," +
-    	                                 	rs.getString("preparation")+"," +
+    	                                 	rs.getString("preparationStyle")+"," +
                                      		rs.getString("size") + "," +
                                        		rs.getString("allergies");
 					break;

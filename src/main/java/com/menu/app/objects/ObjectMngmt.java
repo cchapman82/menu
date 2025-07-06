@@ -155,7 +155,7 @@ public class ObjectMngmt {
 			Study.getInstance().studyRestaurant(res);
 			
 		} catch (NullPointerException e) {
-			GUIFactory.getGUI("ms", "No restaurant selected, return to main menu");
+		//	GUIFactory.getGUI("ms", "No restaurant selected, return to main menu");
 		}
 	}
 

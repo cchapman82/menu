@@ -14,6 +14,7 @@ com/menu/app/MenuItemGUI$2.class
 com/menu/app/UpdateMIGUI$1.class
 com/menu/app/UpdateAGUI.class
 com/menu/app/IndexGUI$5.class
+com/menu/app/StudyGUI$4.class
 com/menu/app/UpdateIGUI$2.class
 com/menu/app/FindGUI$1.class
 com/menu/app/DisplayGUI$2.class
@@ -29,6 +30,7 @@ com/menu/app/MICollisionGUI$2.class
 com/menu/app/MenuItem.class
 com/menu/app/ObjectMaker.class
 com/menu/app/UpdateIGUI$3.class
+com/menu/app/StudyGUI$3.class
 com/menu/app/UpdateMIGUI$3.class
 com/menu/app/MICollisionGUI.class
 com/menu/app/DatabaseController.class
@@ -57,6 +59,7 @@ com/menu/app/RestaurantGUI.class
 com/menu/app/IndexGUI$4.class
 com/menu/app/UpdateMIGUI$2.class
 com/menu/app/UpdateIGUI$1.class
+com/menu/app/StudyGUI$5.class
 com/menu/app/ObjectMngmt.class
 com/menu/app/ObjectFactory.class
 com/menu/app/MenuItemGUI$3.class

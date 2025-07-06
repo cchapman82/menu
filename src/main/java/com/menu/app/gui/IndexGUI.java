@@ -23,7 +23,7 @@ public class IndexGUI implements GUIImplementation {
 	JFrame f = new JFrame("Menu Program Home");
 
 	final JLabel l3 = new JLabel();
-	l3.setBounds(50, 300, 300, 30);
+	l3.setBounds(50, 370, 300, 30);
 	f.add(l3);
 
 	JMenuBar mb = new JMenuBar();
@@ -134,7 +134,7 @@ public class IndexGUI implements GUIImplementation {
                 }
         });
 	f.add(b5);
-	f.setSize(500, 400);
+	f.setSize(500, 500);
 	f.setLayout(null);
 	f.setVisible(true);
 	f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

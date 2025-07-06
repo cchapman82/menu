@@ -59,7 +59,9 @@ public class Main {
 			case "m" : 
 				//get item name
 				item = JOptionPane.showInputDialog("Please enter name of item");
-				if(ObjectMngmt.getInstance().checkIfExists(type, item)) {
+				if(item == "" || item == null) {
+					setOption(".");
+				} else if(ObjectMngmt.getInstance().checkIfExists(type, item)) {
 					if(type.equals("m")) {
 						setOption("mc", item);
 					} else {
@@ -85,6 +87,7 @@ public class Main {
 		if(ObjectMngmt.getInstance().checkIfExists(type, item)) {
                         //if entered, find item or rename item
                 	GUIFactory.getGUI("u", type, item);
+			setOption(".");
                 } else {
 			JOptionPane.showMessageDialog(new JFrame(), item.toUpperCase() 
 				+ "  not entered, enter item into system.");
@@ -101,6 +104,7 @@ public class Main {
 				       GUIFactory.getGUI("d", type, item);
 				       break;
 				case "r" :
+				       ObjectMngmt.getInstance().getRestaurantStudy(item);
 				       GUIFactory.getGUI("s", item);
 				       break;
 				default :

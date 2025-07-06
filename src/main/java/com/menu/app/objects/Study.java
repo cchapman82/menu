@@ -127,9 +127,11 @@ public class Study {
 	public String getCategories() {
 		String result = "";
 		for (String s : menuCategories) {
+			System.out.println(s);
 			result += s + "\n";
 		}
 		result = result.substring(0, result.length());
+		System.out.println("Categories are " + result);
 		return result;
 	}
 

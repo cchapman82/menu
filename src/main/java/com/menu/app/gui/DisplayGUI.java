@@ -29,6 +29,7 @@ public class DisplayGUI implements GUIImplementation {
                 	}
         	});
 		String item = ObjectMngmt.getInstance().getObjectString(type, name);
+		item = item.replace(",", "<br>");
 		JLabel l = new JLabel("<html>" + item + "<html>");
 		l.setBounds(10, 10, 200, 300);
 		f.add(l);
