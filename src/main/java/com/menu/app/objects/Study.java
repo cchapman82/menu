@@ -18,21 +18,25 @@ package com.menu.app;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.HashSet;
 
 public class Study {
 	
 	private static Study study = null;
-	private Scanner inStudy = new Scanner(System.in);
-	private int menuNum;
-	private Boolean endCont = false;
-//	private Restaurant res = new Restaurant();
 	private static ObjectMngmt objMngmt = ObjectMngmt.getInstance();
-	private ArrayList<String> menuCategories = new ArrayList<String>();
+	private Scanner inStudy = new Scanner(System.in);
+	private Boolean endCont = false;
+	private Restaurant res = new Restaurant();
+	private Set<String> menuCategories = new HashSet<String>();
+//	private ArrayList<String> menuCategories = new ArrayList<String>();
 	private ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
 	private HashMap<String, ArrayList<String>> categoryItems =
 			new HashMap<String, ArrayList<String>>();
+	private int menuNum = menuItems.size();
+	private int catNum = menuCategories.size();
 
 	private Study() {
 		inStudy.useDelimiter("\n");
@@ -46,25 +50,48 @@ public class Study {
 		}
 	}
 
+	public int getMenuNum() { return menuNum;}
+	public int getCatNum() { return catNum;}
+
+	public String getCategories() {
+		String result = "";
+		for (String s : menuCategories) {
+			result += s + "<br>";
+		}
+		return result.substring(0, result.length());
+	}
+
+	//return number of Items in categories
+	public Integer[] getCatItemNums() {
+		Integer[] result = new Integer[menuCategories.size()];
+		int i = 0;
+		for(Map.Entry<String, ArrayList<String>> e : categoryItems.entrySet()) {
+			result[i] = e.getValue().size();
+			i++;
+		}
+		return result;
+	}
+
+	// sets up lists to study
 	public void studyRestaurant(Restaurant r) {
-//		res = r;
+		res = r;
 		String[] menuItemStrings = new String[0];
-		String menu = r.getMenu();
+		String menu = res.getMenu();
 		if (menu != "") {
 			menuItemStrings = menu.split(",");
 		}
-		menuNum = menuItemStrings.length;
-		for (int i = 0; i < menuNum; i++) {
+		//menuNum = menuItemStrings.length;
+		for (int i = 0; i < menuItemStrings.length; i++) {
 			MenuItem m = objMngmt.getMenuItem(menuItemStrings[i]);
 			if (!m.getName().equals(null)) {
 				menuItems.add(m);
-			} 
-			if (!menuCategories.contains(m.getMenuCategory())) {
+		
+		//	if (!menuCategories.contains(m.getMenuCategory())) {
 				menuCategories.add(m.getMenuCategory());
-				categoryItems.put(m.getMenuCategory(), new ArrayList<String>());
+				categoryItems.putIfAbsent(m.getMenuCategory(), new ArrayList<String>());
 				categoryItems.get(m.getMenuCategory()).add(m.getName());
-			} else {
-				categoryItems.get(m.getMenuCategory()).add(m.getName());	
+		/*	} else {
+				categoryItems.get(m.getMenuCategory()).add(m.getName());	*/
 			}
 		}
 
@@ -96,7 +123,7 @@ public class Study {
 		}*/
 	}
 
-	private void studyMenu(String r) {
+/*	private void studyMenu(String r) {
 		System.out.println("This menu contains these categories");
 		showCategories();
 		System.out.println("Menu Categories  for  " + r);
@@ -107,7 +134,7 @@ public class Study {
 			while (!nameQuestion(menuCategories, "menu")) {}
 		}
 		
-	}
+	}*/
 
 	private void studyCategory(String category) {
 		ArrayList<String> categoryItemStrings = categoryItems.get(category);
@@ -124,16 +151,6 @@ public class Study {
 		}
 	}
 
-	public String getCategories() {
-		String result = "";
-		for (String s : menuCategories) {
-			System.out.println(s);
-			result += s + "\n";
-		}
-		result = result.substring(0, result.length());
-		System.out.println("Categories are " + result);
-		return result;
-	}
 
 	private void studyItem(MenuItem m) {
 		System.out.println(m.getName());
@@ -238,10 +255,5 @@ public class Study {
 			getNumInput();
 		}
 		return result;
-	}
-	private void showCategories() {
-		for (String s : menuCategories) {
-			System.out.println(s);
-		}
 	}
 }

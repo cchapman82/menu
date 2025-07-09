@@ -42,7 +42,7 @@ public class StudyGUI implements GUIImplementation {
 		t2.setBounds(10, 40, 300, 30);
 		f.add(t2);
 
-		JTextArea tA1 = new JTextArea(menuCategories);
+		JLabel tA1 = new JLabel("<html>" + menuCategories + "<html>");
 		tA1.setBounds(10, 80, 300, 30);
 		JScrollPane scrollA = new JScrollPane(tA1);
 		scrollA.setBounds(10, 80, 300, 30);
@@ -61,14 +61,14 @@ public class StudyGUI implements GUIImplementation {
 		f.getContentPane().add(scroll);
 	
 		JLabel sl = new JLabel("What to Study ...");
-		sl.setBounds(25, 350, 100, 30);
+		sl.setBounds(25, 350, 300, 30);
 		f.add(sl);	
 
 		JButton sb1 = new JButton("Menu");
 		sb1.setBounds(25, 400, 125, 30);
 		sb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.setOption(".");
+				Main.studyItems("m", name);
 				f.dispose();
 			}
 		});
@@ -76,7 +76,7 @@ public class StudyGUI implements GUIImplementation {
 		sb2.setBounds(175, 400, 125, 30);
 		sb2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.setOption(".");
+				Main.studyItems("c", name);
 				f.dispose();
 			}
 		});
@@ -84,7 +84,7 @@ public class StudyGUI implements GUIImplementation {
 		sb3.setBounds(325, 400, 125, 30);
 		sb3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.setOption(".");
+				Main.studyItems("i", name);
 				f.dispose();
 			}
 		});

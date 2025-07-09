@@ -39,6 +39,11 @@ public class GUIFactory {
 		switch(s) {
 			case "f" :
 				return new FindGUI(type, name);
+			case "s" :
+				switch(type) {
+					case "m" :
+						return new StudyMenuGUI(name);
+				}
 			case "u" :
 				switch(type) {
 					case "m" :
@@ -52,6 +57,15 @@ public class GUIFactory {
 				}
 			case "d" :
 				return new DisplayGUI(type, name);
+			default :
+				return new IndexGUI();
+		}
+	}
+
+	public static GUIImplementation getAnswerGUI(String type, String name) {
+		switch(type) {
+			case "m" :
+				return new MenuAnswerGUI(name);
 			default :
 				return new IndexGUI();
 		}

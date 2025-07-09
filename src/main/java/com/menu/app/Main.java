@@ -123,4 +123,8 @@ public class Main {
 		GUIFactory.getGUI("f", type, item);
 	}
 
+	public static void studyItems(String type, String item) {
+		GUIFactory.getGUI("s", type, item);
+	}
+
 }

@@ -9,6 +9,7 @@ com/menu/app/StudyGUI$1.class
 com/menu/app/GUIImplementation.class
 com/menu/app/FindGUI.class
 com/menu/app/IngredientGUI$3.class
+com/menu/app/StudyMenuGUI$2.class
 com/menu/app/RestaurantGUI$3.class
 com/menu/app/MenuItemGUI$2.class
 com/menu/app/UpdateMIGUI$1.class
@@ -21,20 +22,25 @@ com/menu/app/DisplayGUI$2.class
 com/menu/app/RestaurantGUI$2.class
 com/menu/app/MenuItemGUI.class
 com/menu/app/StudyGUI.class
+com/menu/app/StudyMenuGUI.class
+com/menu/app/StudyMenuGUI$3.class
 com/menu/app/IndexGUI$3.class
 com/menu/app/Ingredient.class
 com/menu/app/Study.class
 com/menu/app/UpdateAGUI$3.class
+com/menu/app/MenuAnswerGUI$1.class
 com/menu/app/IndexGUI$6.class
 com/menu/app/MICollisionGUI$2.class
 com/menu/app/MenuItem.class
 com/menu/app/ObjectMaker.class
 com/menu/app/UpdateIGUI$3.class
 com/menu/app/StudyGUI$3.class
+com/menu/app/MenuAnswerGUI.class
 com/menu/app/UpdateMIGUI$3.class
 com/menu/app/MICollisionGUI.class
 com/menu/app/DatabaseController.class
 com/menu/app/RestaurantGUI$1.class
+com/menu/app/MenuAnswerGUI$3.class
 com/menu/app/UpdateRGUI.class
 com/menu/app/MenuItemGUI$1.class
 com/menu/app/Allergy.class
@@ -51,6 +57,7 @@ com/menu/app/IngredientGUI$1.class
 com/menu/app/IndexGUI$1.class
 com/menu/app/UpdateAGUI$1.class
 com/menu/app/IngredientGUI$2.class
+com/menu/app/MenuAnswerGUI$2.class
 com/menu/app/AllergyGUI.class
 com/menu/app/UpdateRGUI$1.class
 com/menu/app/StudyGUI$2.class
@@ -67,3 +74,4 @@ com/menu/app/Main.class
 com/menu/app/DisplayGUI$1.class
 com/menu/app/FindGUI$3.class
 com/menu/app/UpdateMIGUI.class
+com/menu/app/StudyMenuGUI$1.class

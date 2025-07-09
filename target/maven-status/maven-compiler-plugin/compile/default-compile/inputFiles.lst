@@ -15,6 +15,7 @@
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/objects/Allergy.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/UpdateAGUI.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/objects/ObjectFactory.java
+/home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/MenuAnswerGUI.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/Main.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/objects/Study.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/UpdateRGUI.java
@@ -24,3 +25,4 @@
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/StudyGUI.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/objects/MenuItem.java
 /home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/DisplayGUI.java
+/home/christopher/Programs/Restaurants/NewJob/Menu/src/main/java/com/menu/app/gui/StudyMenuGUI.java
