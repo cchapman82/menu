@@ -132,9 +132,9 @@ public class Study {
 		
 	}*/
 
-	private void studyCategory(String category) {
-		ArrayList<String> categoryItemStrings = categoryItems.get(category);
-		Boolean cont = true;
+	public ArrayList<String> getCatItems(String category) {
+		return categoryItems.get(category);
+/*		Boolean cont = true;
 		System.out.println("Category  :  " + category);
 		for (String s : categoryItemStrings) {
 			System.out.println(s);
@@ -144,7 +144,7 @@ public class Study {
 		}
 		if (endCont == false) {
 			while (!nameQuestion(categoryItemStrings, "category")) {}
-		}
+		}*/
 	}
 
 

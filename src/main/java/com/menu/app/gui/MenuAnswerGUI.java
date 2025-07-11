@@ -29,8 +29,6 @@ public class MenuAnswerGUI implements GUIImplementation {
 
         MenuAnswerGUI(String name) {
 
-                //String menuCategories = Study.getInstance().getCategories();
-                //String[] strings = menuCategories.split("<br>");
 
 		JFrame f = new JFrame("Menu answers for  " + name );
 

@@ -43,6 +43,10 @@ public class GUIFactory {
 				switch(type) {
 					case "m" :
 						return new StudyMenuGUI(name);
+					case "c" :
+						return new ChooseCategoryGUI(name);
+					case "cc" :
+						return new StudyCategoryGUI(name);
 				}
 			case "u" :
 				switch(type) {
@@ -66,6 +70,8 @@ public class GUIFactory {
 		switch(type) {
 			case "m" :
 				return new MenuAnswerGUI(name);
+			case "c" :
+				return new CategoryAnswerGUI(name);
 			default :
 				return new IndexGUI();
 		}
