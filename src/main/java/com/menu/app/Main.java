@@ -104,7 +104,9 @@ public class Main {
 				       GUIFactory.getGUI("d", type, item);
 				       break;
 				case "r" :
+				       if(Study.getInstance().checkRestaurant()) {
 				       ObjectMngmt.getInstance().getRestaurantStudy(item);
+				       }
 				       GUIFactory.getGUI("s", item);
 				       break;
 				default :

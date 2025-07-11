@@ -11,7 +11,8 @@ package com.menu.app;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+import java.util.HashMap;
 
 
 
@@ -19,12 +20,7 @@ public class StudyMenuGUI implements GUIImplementation {
 
         StudyMenuGUI(String name) {
 
-                String menuCategories = Study.getInstance().getCategories();
-		String[] strings = menuCategories.split("<br>");
-		Integer numOfCategories = Study.getInstance().getCatNum();
-		Integer numCatAnswer = 0;
-		Integer[] nums = Study.getInstance().getCatItemNums();
-		final Integer[] numsAnswer = new Integer[strings.length];
+		Map<String, Integer> catNums = Study.getInstance().getCatItemNums();
 
 
                 JFrame f = new JFrame("Study Restaurant " + name + " Home");
@@ -49,15 +45,15 @@ public class StudyMenuGUI implements GUIImplementation {
                 t2.setBounds(10, 40, 300, 30);
 		f.add(t2);
 
-		JLabel t3 = new JLabel("<html>" + menuCategories  + "<html>");
+		JLabel t3 = new JLabel("<html>" + catNums.keySet()  + "<html>");
 		t3.setBounds(20, 70, 300, 200);
 	       f.add(t3);
 
-		JLabel t4 = new JLabel("<html>" + getCatNums(nums, strings) + "<html");
+		JLabel t4 = new JLabel("<html>" + getCatNums(catNums) + "<html");
 		t4.setBounds(20, 270, 300, 200);
 		f.add(t4);
 		Timer timer = new Timer(15000, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {	
 				GUIFactory.getAnswerGUI("m", name);
 			}	
 		});
@@ -69,8 +65,10 @@ public class StudyMenuGUI implements GUIImplementation {
                 b.setBounds(200, 475, 100, 30);
                 b.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
+
                                 Main.getItem("r", name);
                                 f.dispose();
+				timer.stop();
                         }
                 });
                 f.add(b);
@@ -85,10 +83,10 @@ public class StudyMenuGUI implements GUIImplementation {
                 f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         }
 
-	private String getCatNums(Integer[] nums, String[] strings) {
-		String result = "The categories have this manu items each:<br>";
-		for(int i = 0; i < nums.length; i++) {
-			result+= strings[i] + "		" + nums[i] + "<br>";
+	private String getCatNums(Map<String,Integer> catNums) {
+		String result = "The categories have this many items each:<br>";
+		for(Map.Entry<String, Integer> e : catNums.entrySet()) {
+			result+= e.getKey() + "		" + e.getValue() + "<br>";
 		}
 		return result.substring(0, result.length());
 	}

@@ -29,7 +29,7 @@ public class Study {
 	private static ObjectMngmt objMngmt = ObjectMngmt.getInstance();
 	private Scanner inStudy = new Scanner(System.in);
 	private Boolean endCont = false;
-	private Restaurant res = new Restaurant();
+	private Restaurant res = null;
 	private Set<String> menuCategories = new HashSet<String>();
 //	private ArrayList<String> menuCategories = new ArrayList<String>();
 	private ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
@@ -62,14 +62,16 @@ public class Study {
 	}
 
 	//return number of Items in categories
-	public Integer[] getCatItemNums() {
-		Integer[] result = new Integer[menuCategories.size()];
+	public Map<String, Integer> getCatItemNums() {
+		Map<String, Integer> result = new HashMap<String, Integer>();
 		int i = 0;
 		for(Map.Entry<String, ArrayList<String>> e : categoryItems.entrySet()) {
-			result[i] = e.getValue().size();
-			i++;
+			result.put(e.getKey(), e.getValue().size());
 		}
 		return result;
+	}
+	public Boolean checkRestaurant() {
+		return res == null;
 	}
 
 	// sets up lists to study
@@ -80,21 +82,15 @@ public class Study {
 		if (menu != "") {
 			menuItemStrings = menu.split(",");
 		}
-		//menuNum = menuItemStrings.length;
 		for (int i = 0; i < menuItemStrings.length; i++) {
 			MenuItem m = objMngmt.getMenuItem(menuItemStrings[i]);
 			if (!m.getName().equals(null)) {
 				menuItems.add(m);
-		
-		//	if (!menuCategories.contains(m.getMenuCategory())) {
 				menuCategories.add(m.getMenuCategory());
 				categoryItems.putIfAbsent(m.getMenuCategory(), new ArrayList<String>());
 				categoryItems.get(m.getMenuCategory()).add(m.getName());
-		/*	} else {
-				categoryItems.get(m.getMenuCategory()).add(m.getName());	*/
 			}
 		}
-
 		
 /*		Boolean cont = true;
 		while (cont) {
