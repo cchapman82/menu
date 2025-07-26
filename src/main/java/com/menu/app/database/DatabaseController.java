@@ -81,9 +81,9 @@ public class DatabaseController {
 		try {
 			InputStream dbprops = DatabaseController.class.getClassLoader().getResourceAsStream("config.properties");
 			prop.load(dbprops);
-			conn = DriverManager.getConnection(prop.getProperty("URL"),
+			conn = DriverManager.getConnection(prop.getProperty("URL"))/*,
 					prop.getProperty("CONNECTION_USERNAME"),
-					prop.getProperty("CONNECTION_PASSWORD"));
+					prop.getProperty("CONNECTION_PASSWORD"))*/;
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
 
