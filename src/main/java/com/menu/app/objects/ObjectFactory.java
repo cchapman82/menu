@@ -1,4 +1,4 @@
-package com.menu.app;
+package com.menu.app.objects;
 
 /*
  *		This is the factory of the factory pattern.  It will generate an object
@@ -26,14 +26,13 @@ public class ObjectFactory {
 
 		switch(s) {
 			case "m" :
-				MenuItem mi = new MenuItem();
-				return mi;
+				return new MenuItem();
 			case "r" :
-				Restaurant r = new Restaurant();
+				return new Restaurant();
 			case "i" :
-				Ingredient i = new Ingredient();
+				return new Ingredient();
 			case "a" :
-				Allergy a = new Allergy();
+				return new Allergy();
 			default :
 				return new MenuItem();
 		}

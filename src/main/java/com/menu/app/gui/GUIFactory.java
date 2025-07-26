@@ -1,4 +1,4 @@
-package com.menu.app;
+package com.menu.app.gui;
 
 /*
  *
@@ -7,7 +7,6 @@ package com.menu.app;
  *
  *
  */
-import javax.swing.*;
 
 public class GUIFactory {
 

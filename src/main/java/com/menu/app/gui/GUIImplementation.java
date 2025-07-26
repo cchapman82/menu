@@ -1,4 +1,4 @@
-package com.menu.app;
+package com.menu.app.gui;
 
 /*
  *

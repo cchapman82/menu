@@ -1,4 +1,4 @@
-package com.menu.app;
+package com.menu.app.gui;
 
 /*
  *
@@ -10,6 +10,11 @@ package com.menu.app;
  * */
 
 import javax.swing.*;
+
+import com.menu.app.Main;
+import com.menu.app.objects.MenuItem;
+import com.menu.app.objects.ObjectMngmt;
+
 import java.awt.event.*;
 
 public class MenuItemGUI implements GUIImplementation {
@@ -159,6 +164,7 @@ public class MenuItemGUI implements GUIImplementation {
                         	        	objMngmt.pushToArray("m", mi);
                 	        	        objMngmt.pushToDatabase("m", mi.toString());
         	        	                objMngmt.updateRestaurant(mi);
+										Main.setOption(".");
 	
 	         	               	} catch (Exception ec) {
  	                                	JOptionPane.showMessageDialog(f, 

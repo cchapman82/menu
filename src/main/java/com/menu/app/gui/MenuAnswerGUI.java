@@ -1,4 +1,4 @@
-package com.menu.app;
+package com.menu.app.gui;
 
 /*
  *
@@ -10,11 +10,11 @@ package com.menu.app;
  * */
 
 import javax.swing.*;
+
+import com.menu.app.Main;
+import com.menu.app.objects.Study;
+
 import java.awt.event.*;
-import java.awt.*;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -22,7 +22,6 @@ import java.util.HashMap;
 public class MenuAnswerGUI implements GUIImplementation {
 
 		private Map<String, Integer> catNums = Study.getInstance().getCatItemNums();
-		private int catExpected = catNums.keySet().size();
 		private JTextField[] answerFields = new JTextField[catNums.keySet().size()];
 		private JLabel[] answerLabels = new JLabel[catNums.keySet().size()];
 		private Map<String, Integer> answers = new HashMap<String, Integer>();

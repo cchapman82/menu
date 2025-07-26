@@ -1,4 +1,4 @@
-package com.menu.app;
+package com.menu.app.gui;
 
 /*
  *
@@ -10,6 +10,10 @@ package com.menu.app;
  * */
 
 import javax.swing.*;
+
+import com.menu.app.Main;
+import com.menu.app.objects.ObjectMngmt;
+
 import java.awt.event.*;
 
 

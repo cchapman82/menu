@@ -1,4 +1,4 @@
-package com.menu.app;
+package com.menu.app.objects;
 
 /*		Menu Program : Ingredient
  *
@@ -18,11 +18,6 @@ package com.menu.app;
  * 	Version: 1.0
  *
  * */
-
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
 
 public class Ingredient implements ObjectMaker {
 

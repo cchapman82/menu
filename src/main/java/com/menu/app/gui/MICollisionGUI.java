@@ -1,4 +1,4 @@
-package com.menu.app;
+package com.menu.app.gui;
 
 /*
  *
@@ -10,6 +10,9 @@ package com.menu.app;
  * */
 
 import javax.swing.*;
+
+import com.menu.app.Main;
+
 import java.awt.event.*;
 
 public class MICollisionGUI implements GUIImplementation {

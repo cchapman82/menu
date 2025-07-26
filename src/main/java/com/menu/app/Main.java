@@ -32,6 +32,9 @@ package com.menu.app;
 
 import javax.swing.*;
 import java.awt.event.*;
+import com.menu.app.gui.GUIFactory;
+import com.menu.app.objects.ObjectMngmt;
+import com.menu.app.objects.Study;
 
 public class Main {
 
@@ -64,6 +67,8 @@ public class Main {
 				} else if(ObjectMngmt.getInstance().checkIfExists(type, item)) {
 					if(type.equals("m")) {
 						setOption("mc", item);
+						//setOption(".");
+
 					} else {
 						//if entered, find item or rename item
 						JOptionPane.showMessageDialog(new JFrame(), item + " already entered");
@@ -71,8 +76,9 @@ public class Main {
 				} else {
 					//if not entered, continue to adding
 					setOption(type, item);
+					//setOption(".");
+
 				}
-				setOption(".");
 				break;
 			default :
 				setOption(".");

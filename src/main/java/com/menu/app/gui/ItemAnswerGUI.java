@@ -1,4 +1,4 @@
-package com.menu.app;
+package com.menu.app.gui;
 
 /*
  *
@@ -10,12 +10,10 @@ package com.menu.app;
  * */
 
 import javax.swing.*;
+
+import com.menu.app.objects.ObjectMngmt;
+
 import java.awt.event.*;
-import java.awt.*;
-import java.util.Map;
-import java.util.HashMap;
-
-
 
 public class ItemAnswerGUI implements GUIImplementation {
 

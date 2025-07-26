@@ -1,4 +1,4 @@
-package com.menu.app;
+package com.menu.app.objects;
 
 /*
  *
@@ -46,7 +46,8 @@ package com.menu.app;
  * */
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import com.menu.app.database.DatabaseController;
 
 public class ObjectMngmt {
 

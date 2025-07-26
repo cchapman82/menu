@@ -1,4 +1,4 @@
-package com.menu.app;
+package com.menu.app.database;
 
 /*		Menu Program : Database Controller
  *               
@@ -39,11 +39,12 @@ package com.menu.app;
 
 import java.sql.*;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.Set;
+
+import com.menu.app.objects.ObjectMngmt;
+
 import java.util.Properties;
 import java.io.InputStream;
-import java.io.IOException;
 
 public class DatabaseController {
 
@@ -81,9 +82,10 @@ public class DatabaseController {
 		try {
 			InputStream dbprops = DatabaseController.class.getClassLoader().getResourceAsStream("config.properties");
 			prop.load(dbprops);
-			conn = DriverManager.getConnection(prop.getProperty("URL"))/*,
+			conn = DriverManager.getConnection(prop.getProperty("URL"),
 					prop.getProperty("CONNECTION_USERNAME"),
-					prop.getProperty("CONNECTION_PASSWORD"))*/;
+					prop.getProperty("CONNECTION_PASSWORD"));
+			//conn = DriverManager.getConnection("jdbc:sqlite:menu.db");
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
 
