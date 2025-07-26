@@ -43,21 +43,21 @@ public class UpdateRGUI implements GUIImplementation {
 
 		String[] objectInfo = ObjectMngmt.getInstance().getObjectString(type, name).split(",");
 
-	       	JLabel jl1 = new JLabel("Name");
+	       	JLabel jl1 = new JLabel("Name : ");
 		jl1.setBounds(60, 150, 100, 30);
 		f.add(jl1);
 		JTextArea ta1 = new JTextArea(objectInfo[0]);
 		ta1.setBounds(180, 150, 260, 30);
 		f.add(ta1);
 
-		JLabel jl2 = new JLabel("Location");
+		JLabel jl2 = new JLabel("Location : ");
 		jl2.setBounds(60, 190, 100, 30);
 		f.add(jl2);
 		JTextArea ta2 = new JTextArea(objectInfo[1]);
 		ta2.setBounds(180, 190, 260, 30);
 		f.add(ta2);
 
-		JLabel jl3 = new JLabel("Description");
+		JLabel jl3 = new JLabel("Description : ");
 		jl3.setBounds(60, 230, 260, 30);
 		f.add(jl3);
 		JTextArea ta3 = new JTextArea(objectInfo[2]);
@@ -89,13 +89,13 @@ public class UpdateRGUI implements GUIImplementation {
 						+ "\n\t" + jl3.getText() + ": " + ta3.getText());
 				if(option == 0) {
 					if(!ta1.getText().equals(objectInfo[0])) {
-                	                        map.put(jl1.getText().toLowerCase(), ta1.getText());
+                	                        map.put(jl1.getText().toLowerCase().replace(":", ""), ta1.getText().toLowerCase().replace(",", "~"));
         	                        }
 	                                if(!ta2.getText().equals(objectInfo[1])) {
-                                        	map.put(jl2.getText().toLowerCase(), ta2.getText());
+                                        	map.put(jl2.getText().toLowerCase().replace(":", ""), ta2.getText().toLowerCase().replace(",", "~"));
                                 	}
                         	        if(!ta3.getText().equals(objectInfo[2])) {
-                	                        map.put(jl3.getText().toLowerCase(), ta3.getText());
+                	                        map.put(jl3.getText().toLowerCase().replace(":", ""), ta3.getText().toLowerCase().replace(",", "~"));
         	                        }
 					DatabaseController.getInstance().updateInfo(type, name, map);
 				} else if(option == 1) {

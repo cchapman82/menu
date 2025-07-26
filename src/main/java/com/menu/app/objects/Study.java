@@ -84,7 +84,7 @@ public class Study {
 		}
 		for (int i = 0; i < menuItemStrings.length; i++) {
 			MenuItem m = objMngmt.getMenuItem(menuItemStrings[i]);
-			if (!m.getName().equals(null)) {
+			if (!m.getName().equals(null) && m.getCurrent() == 'y') {
 				menuItems.add(m);
 				menuCategories.add(m.getMenuCategory());
 				categoryItems.putIfAbsent(m.getMenuCategory(), new ArrayList<String>());

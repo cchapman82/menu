@@ -41,26 +41,20 @@ public class UpdateAGUI implements GUIImplementation {
 
                 String[] objectInfo = ObjectMngmt.getInstance().getObjectString(type, name).split(",");
 
-     		JLabel jl1 = new JLabel("Name");
+     		JLabel jl1 = new JLabel("Name : ");
      		jl1.setBounds(60, 150, 100, 30);
               	f.add(jl1);
         	JTextArea ta1 = new JTextArea(objectInfo[0]);
                 ta1.setBounds(180, 150, 260, 30);
          	f.add(ta1);
 
-       		JLabel jl2 = new JLabel("Description");
+       		JLabel jl2 = new JLabel("Items : ");
 		jl2.setBounds(60, 190, 100, 30);
            	f.add(jl2);
      		JTextArea ta2 = new JTextArea(objectInfo[1]);
             	ta2.setBounds(180, 190, 260, 30);
            	f.add(ta2);
 
-         	JLabel jl3 = new JLabel("Treatment");
-          	jl3.setBounds(60, 230, 100, 30);
-             	f.add(jl3);
-          	JTextArea ta3 = new JTextArea(objectInfo[2]);
-      		ta3.setBounds(180, 230, 260, 30);
-              	f.add(ta3);
 
 
 		JButton b = new JButton("To Home");
@@ -82,19 +76,15 @@ public class UpdateAGUI implements GUIImplementation {
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed( ActionEvent e) {
 				int option = JOptionPane.showConfirmDialog(f, "Is this information " +
-						"correct?\n\t" + jl1.getText() + ": " + ta1.getText()
-						+ "\n\t" + jl2.getText() + ": " + ta2.getText()
-						+ "\n\t" + jl3.getText() + ": " + ta3.getText());
+						"correct?\n\t" + jl1.getText() + ta1.getText()
+						+ "\n\t" + jl2.getText() + ta2.getText());
 				if(option == 0) {
 					if(!ta1.getText().equals(objectInfo[0])) {
-                	                        map.put(jl1.getText().toLowerCase(), ta1.getText());
+                	                        map.put(jl1.getText().toLowerCase().replace(":", ""), ta1.getText().toLowerCase().replace(",", "~"));
         	                        }
 	                                if(!ta2.getText().equals(objectInfo[1])) {
-                                        	map.put(jl2.getText().toLowerCase(), ta2.getText());
+                                        	map.put(jl2.getText().toLowerCase().replace(":", ""), ta2.getText().toLowerCase().replace(",", "~"));
                                 	}
-                        	        if(!ta3.getText().equals(objectInfo[2])) {
-                	                        map.put(jl3.getText().toLowerCase(), ta3.getText());
-        	                        }
 					DatabaseController.getInstance().updateInfo(type, name, map);
 				} else if(option == 1) {
 					jl4.setText("Please re-enter information");

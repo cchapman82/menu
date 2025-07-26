@@ -77,12 +77,12 @@ public class RestaurantGUI implements GUIImplementation {
                 b.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
 				int option = JOptionPane.showConfirmDialog(f, "Is this information" +
-				      " correct?\n\t" + jl1.getText() + ": " + ta1.getText() + "\n\t" +
-				      jl2.getText() + ": " + ta2.getText() + "\n\t" + 
-				      jl3.getText() + ": " + ta3.getText());
+				      " correct?\n\t" + jl1.getText() + ta1.getText() + "\n\t" +
+				      jl2.getText() + ta2.getText() + "\n\t" + 
+				      jl3.getText() + ta3.getText());
 			       if(option == 0) {	
                                 	try {
-						Restaurant ri = new Restaurant(ta1.getText().toLowerCase().replace(",", " "), ta2.getText().toLowerCase().replace(",", " "), ta3.getText().toLowerCase().replace(",", " "));
+						Restaurant ri = new Restaurant(ta1.getText().toLowerCase().replace(",", "~"), ta2.getText().toLowerCase().replace(",", "~"), ta3.getText().toLowerCase().replace(",", "~"));
 						objMngmt.pushToArray("r", ri);
 	                                        objMngmt.pushToDatabase("r", ri.toString());
 					} catch (Exception ec) {

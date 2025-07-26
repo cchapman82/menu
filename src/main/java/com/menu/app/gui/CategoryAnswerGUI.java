@@ -25,7 +25,7 @@ public class CategoryAnswerGUI implements GUIImplementation {
 		String cName = name.substring(0, name.indexOf("."));
 		List<String> items = Study.getInstance().getCatItems(cName);
 		int itemsExpected = items.size();
-        	JTextField[] answerFields = new JTextField[items.size()];
+        	JTextField[] answerFields = new JTextField[itemsAnswer];
 		JFrame f = new JFrame("Category answers for  " + cName );
 
 
@@ -39,29 +39,33 @@ public class CategoryAnswerGUI implements GUIImplementation {
                 });
 
                 JLabel l1 = new JLabel("Please answer the questions below...");
-                l1.setBounds(10, 20, 300, 30);
+                l1.setBounds(10, 20, 480, 30);
                 f.add(l1);
 
                 JLabel l2 = new JLabel("You have stated that " + cName +
 			       " has " + itemsAnswer);
-                l2.setBounds(20, 60, 250, 30);
+                l2.setBounds(20, 60, 480, 30);
                 f.add(l2);
 
 
-                	JLabel l3 = new JLabel("What items are in " + cName + "?");
-        	        l3.setBounds(20, 150, 300, 30);
-	                f.add(l3);
+                JLabel l3 = new JLabel("What items are in " + cName + "?");
+        	l3.setBounds(20, 110, 480, 30);
+	        f.add(l3);
 
-                	int yAxis = 190;
-                	for (int i = 0; i < itemsAnswer; i++) {
-                        	JTextField t = new JTextField();
-                        	t.setBounds(240, yAxis, 50, 30);
-                        	f.add(t);
-                	        answerFields[i] = t;
-        	                yAxis += 40;
-	                }
-
-                JButton ab = new JButton("Answer");
+		JPanel jp = new JPanel();
+		jp.setBounds(30, 150, 440, 280);
+		jp.setLayout(new GridLayout(itemsAnswer, 1));
+	
+               	for (int i = 0; i < itemsAnswer; i++) {
+       			JTextField t = new JTextField(" ");
+                       	t.setPreferredSize(new Dimension(300, 30));
+			jp.add(t);
+               	        answerFields[i] = t;
+	       	}
+		JScrollPane s = new JScrollPane(jp);
+		s.setBounds(30, 150, 440, 280);
+		f.getContentPane().add(s);
+ 		JButton ab = new JButton("Answer");
                 ab.setBounds(200, 435, 100, 30);
                 ab.addActionListener(new ActionListener() {
  			public void actionPerformed(ActionEvent e) {
@@ -77,8 +81,8 @@ public class CategoryAnswerGUI implements GUIImplementation {
                 });
                 f.add(ab);
 
-                JButton b = new JButton("To Home");
-                b.setBounds(200, 475, 100, 30);
+                JButton b = new JButton("Back");
+                b.setBounds(175, 475, 150, 30);
                 b.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                                 f.dispose();

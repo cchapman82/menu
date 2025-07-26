@@ -104,12 +104,12 @@ public class DatabaseController {
 				"name varchar, location varchar, description varchar)";
 			stmt.executeUpdate(sql);
 			sql = "CREATE TABLE IF NOT EXISTS allergy (id serial primary key, " +
-					"name varchar, description varchar, tx varchar)";
+					"name varchar, items varchar)";
 			stmt.executeUpdate(sql);
 			sql = "CREATE TABLE IF NOT EXISTS menuItem (id serial primary key, " +
 					"name varchar, restaurant varchar, category varchar, description" +
 			     " varchar, price float, ingredients varchar, " +
-			     "preparation varchar, size varchar, allergies varchar)";
+			     "preparation varchar, size varchar, allergies varchar, current char(1) DEFAULT 'y')";
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
 			System.out.println("Tables not created or accessable");
@@ -127,7 +127,7 @@ public class DatabaseController {
 			switch(type) {
 				case "m" :
 					System.out.println(item);
-					sql = "INSERT INTO menuitem (name, restaurant, category, description, price, ingredients, preparation, size, allergies) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					sql = "INSERT INTO menuitem (name, restaurant, category, description, price, ingredients, preparation, size, allergies, current) values (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 			
 					prepdstmt = conn.prepareStatement(sql);
 					prepdstmt.setString(1, itemFields[0]);
@@ -139,6 +139,7 @@ public class DatabaseController {
 					prepdstmt.setString(7, itemFields[6]);
 					prepdstmt.setString(8, itemFields[7]);
 					prepdstmt.setString(9, itemFields[8]);
+					prepdstmt.setString(10, itemFields[9]);
 					prepdstmt.executeUpdate();
 					break;
 				case "i" :
@@ -158,11 +159,10 @@ public class DatabaseController {
 					prepdstmt.executeUpdate();
 					break;
 				case "a" :
-					sql= "INSERT INTO allergy (name, description, tx) values (?, ?, ?)";
+					sql= "INSERT INTO allergy (name, items) values (?, ?)";
 					prepdstmt = conn.prepareStatement(sql);
 					prepdstmt.setString(1, itemFields[0]);
 					prepdstmt.setString(2, itemFields[1]);
-					prepdstmt.setString(3, itemFields[2]);
 					prepdstmt.executeUpdate();
 					break;
 			}
@@ -187,7 +187,7 @@ public class DatabaseController {
 				switch (type) {
 					case "m" :
 						index = 0;
-						sql = "SELECT name, restaurant, category, description, price, ingredients, preparation, size, allergies FROM menuItem";
+						sql = "SELECT name, restaurant, category, description, price, ingredients, preparation, size, allergies, current FROM menuItem";
 						rs = stmt.executeQuery(sql);
 						rs.last();
 						result = new String[rs.getRow()];
@@ -201,7 +201,8 @@ public class DatabaseController {
 								rs.getString("ingredients") + "," +
 								rs.getString("preparation")+"," +
 								rs.getString("size") + "," +
-								rs.getString("allergies");
+								rs.getString("allergies") + "," +
+								rs.getString("current");
 							index++;		
 						}
 						objMngmt.makeList(type, result);
@@ -238,15 +239,14 @@ public class DatabaseController {
 						break;
 					case "a" :
 						index = 0;
-						sql = "SELECT name, description, tx FROM allergy";
+						sql = "SELECT name, items FROM allergy";
 						rs = stmt.executeQuery(sql);
 						rs.last();
 						result = new String[rs.getRow()];
 						rs.beforeFirst();
 						while(rs.next()) {
 							result[index] = rs.getString("name") + "," +
-								rs.getString("description") + "," +
-								rs.getString("tx");
+								rs.getString("items");
 							index++;
 						}
 						objMngmt.makeList(type, result);
@@ -278,17 +278,17 @@ public class DatabaseController {
  						rs.getString("ingredients") + "," +
     	                                 	rs.getString("preparation")+"," +
                                      		rs.getString("size") + "," +
-                                       		rs.getString("allergies");
+                                       		rs.getString("allergies") + "," +
+						rs.getString("current");
 					break;
 				case "a" : 
-					sql = "SELECT name, description, tx FROM allergy WHERE NAME = ?";
+					sql = "SELECT name, items FROM allergy WHERE NAME = ?";
 					prepdstmt = conn.prepareStatement(sql);
 					prepdstmt.setString(1, itemName);
 					rs = prepdstmt.executeQuery();
 					rs.first();
 					result = rs.getString("name") + "," +
-                            	                rs.getString("description") + "," +
-						rs.getString("tx");
+                            	                rs.getString("items");
 					break;
 				case "i" : 
 					sql = "SELECT * FROM ingredient WHERE NAME = ?";
@@ -410,10 +410,10 @@ public class DatabaseController {
 		Set<String> keys = map.keySet();
 		for(String k : keys) {
 			if (k.equals("name")) {
-				info = getItem(type, itemName.replace(","," ")/*.replace(" ", "_")*/);
-				String newInfo = String.valueOf(map.get(k)).replace(","," ")/*.replace(" ","_")*/;
+				info = getItem(type, itemName.replace(","," "));
+				String newInfo = String.valueOf(map.get(k)).replace(","," ");
 				newInfo += info.substring(info.indexOf(","), info.length());
-				deleteItem(type, itemName.replace(","," ")/*.replace(" ", "_")*/);
+				deleteItem(type, itemName.replace(","," "));
 				String[] nInfo = newInfo.split(",");
 				String nnInfo ="'";
 				for(int i = 0; i < nInfo.length; i++) {
@@ -454,8 +454,8 @@ public class DatabaseController {
 				}
 				addItem(type,nnInfo);
 			} else {
-				updateItem(type,itemName/*.replace(","," ").replace(" ", "_")*/, k, 
-						String.valueOf(map.get(k))/*.replace(","," ").replace(" ", "_")*/);
+				updateItem(type,itemName, k, 
+						String.valueOf(map.get(k)));
 			}	
 		}
 		ObjectMngmt.getInstance().updateLists();

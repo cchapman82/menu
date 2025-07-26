@@ -7,6 +7,7 @@ package com.menu.app;
  *
  *
  */
+import javax.swing.*;
 
 public class GUIFactory {
 
@@ -43,10 +44,14 @@ public class GUIFactory {
 				switch(type) {
 					case "m" :
 						return new StudyMenuGUI(name);
-					case "c" :
-						return new ChooseCategoryGUI(name);
 					case "cc" :
+						return new ChooseCategoryGUI(name);
+					case "c" :
 						return new StudyCategoryGUI(name);
+					case "ci" :
+						return new ChooseItemGUI(name);
+					case "i" :
+						return new StudyItemGUI(name);
 				}
 			case "u" :
 				switch(type) {
@@ -71,7 +76,9 @@ public class GUIFactory {
 			case "m" :
 				return new MenuAnswerGUI(name);
 			case "c" :
-				return new CategoryAnswerGUI(name);
+		 		return new CategoryAnswerGUI(name);
+			case "i" :
+		 		return new ItemAnswerGUI(name);
 			default :
 				return new IndexGUI();
 		}

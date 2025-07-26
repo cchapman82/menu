@@ -103,6 +103,13 @@ public class MenuItemGUI implements GUIImplementation {
 		ta9.setBounds(200, 370, 250, 30);
 		f.add(ta9);
 
+		JLabel jl10 = new JLabel("Current(y/n) : ");
+		jl10.setBounds(50, 400, 400, 30);
+		f.add(jl10);
+		JTextField ta10 = new JTextField("y");
+		ta10.setBounds(200, 400, 250, 30);
+		f.add(ta10);
+
 		JButton bb = new JButton("To Home");
                 bb.setBounds(100, 430, 100, 30);
                 bb.addActionListener(new ActionListener() {
@@ -113,9 +120,9 @@ public class MenuItemGUI implements GUIImplementation {
                 });
 
 		//if item is incorrect
-		JLabel jl10 = new JLabel();
-		jl10.setBounds(200, 470, 200, 30);
-		f.add(jl10);
+		JLabel jl11 = new JLabel();
+		jl11.setBounds(200, 470, 200, 30);
+		f.add(jl11);
 
 
 		//add item
@@ -125,28 +132,30 @@ public class MenuItemGUI implements GUIImplementation {
                 	public void actionPerformed(ActionEvent e) {
 				//check to make sure information is correct
 				int option = JOptionPane.showConfirmDialog(f, "Is this information" +
-				      " correct?\n\t" + jl1.getText() + ": " + ta1.getText() + "\n\t" +
-				      jl2.getText() + ": " + ta2.getText() + "\n\t" + 
-				      jl3.getText() + ": " + ta3.getText() + "\n\t" + 
-				      jl4.getText() + ": " + ta4.getText() + "\n\t" +
-				      jl5.getText() + ": " + ta5.getText() + "\n\t" +
-				      jl6.getText() + ": " + ta6.getText() + "\n\t" +
-				      jl7.getText() + ": " + ta7.getText() + "\n\t" +
-				      jl8.getText() + ": " + ta8.getText() + "\n\t" +
-				      jl9.getText() + ": " + ta9.getText());
+				      " correct?\n\t" + jl1.getText() + ta1.getText() + "\n\t" +
+				      jl2.getText() + ta2.getText() + "\n\t" + 
+				      jl3.getText() + ta3.getText() + "\n\t" + 
+				      jl4.getText() + ta4.getText() + "\n\t" +
+				      jl5.getText() + ta5.getText() + "\n\t" +
+				      jl6.getText() + ta6.getText() + "\n\t" +
+				      jl7.getText() + ta7.getText() + "\n\t" +
+				      jl8.getText() + ta8.getText() + "\n\t" +
+				      jl9.getText() + ta9.getText() + "\n\t" +
+				      jl10.getText() + ta10.getText());
 				if(option == 0) {
 					//correct information
                         		try {
 						MenuItem mi = new MenuItem(
-							ta1.getText().toLowerCase().replace(",", " "), 
-							ta2.getText().toLowerCase().replace(",", " "),
-							ta3.getText().toLowerCase().replace(",", " "),
-							ta4.getText().toLowerCase().replace(",", " "), 
+							ta1.getText().toLowerCase().replace(",", "*"), 
+							ta2.getText().toLowerCase().replace(",", "*"),
+							ta3.getText().toLowerCase().replace(",","*"),
+							ta4.getText().toLowerCase().replace(",","*"), 
 							Double.parseDouble(ta5.getText()),
-							ta6.getText().toLowerCase().replace(",", " "), 
-							ta7.getText().toLowerCase().replace(",", " "), 
-							ta8.getText().toLowerCase().replace(",", " "), 
-							ta9.getText().toLowerCase().replace(",", " "));
+							ta6.getText().toLowerCase().replace(",","*"), 
+							ta7.getText().toLowerCase().replace(",","*"), 
+							ta8.getText().toLowerCase().replace(",","*"), 
+							ta9.getText().toLowerCase().replace(",","*"),
+							ta10.getText().toLowerCase().replace(",","*"));
                         	        	objMngmt.pushToArray("m", mi);
                 	        	        objMngmt.pushToDatabase("m", mi.toString());
         	        	                objMngmt.updateRestaurant(mi);
@@ -157,7 +166,7 @@ public class MenuItemGUI implements GUIImplementation {
 			       		}
 				//incorrect informaiton
 				} else if(option == 1) {
-					jl10.setText("Plese re-enter the information");
+					jl11.setText("Plese re-enter the information");
 				//cancel??????????????????????????????????????????
 				} else if(option == 2) {
 					Main.setOption(".");
@@ -168,7 +177,7 @@ public class MenuItemGUI implements GUIImplementation {
 
 		f.add(b);
 		f.add(bb);
-		f.setSize(500, 530);
+		f.setSize(550, 530);
 		f.setLayout(null);
 		f.setVisible(true);
 		f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

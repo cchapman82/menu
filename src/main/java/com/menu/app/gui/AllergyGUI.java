@@ -45,7 +45,7 @@ public class AllergyGUI implements GUIImplementation {
                 ta1.setBounds(200, 40, 250, 30);
                 f.add(ta1);
 
-                JLabel jl2 = new JLabel("Description : ");
+                JLabel jl2 = new JLabel("Items : ");
                 jl2.setBounds(50, 70, 100, 30);
                 f.add(jl2);
                 JTextArea ta2 = new JTextArea();
@@ -53,12 +53,6 @@ public class AllergyGUI implements GUIImplementation {
 		ta2.setLineWrap(true);
                 f.add(ta2);
 
-                JLabel jl3 = new JLabel("Treatment :");
-                jl3.setBounds(50, 130, 400, 30);
-                f.add(jl3);
-                JTextField ta3 = new JTextField();
-                ta3.setBounds(200, 130, 250, 30);
-                f.add(ta3);
 
 		JButton bb = new JButton("To Home");
                 bb.setBounds(100, 430, 100, 30);
@@ -78,15 +72,13 @@ public class AllergyGUI implements GUIImplementation {
                 b.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
 				int option = JOptionPane.showConfirmDialog(f, "Is this information" +
-				      " correct?\n\t" + jl1.getText() + ": " + ta1.getText() + "\n\t" +
-				      jl2.getText() + ": " + ta2.getText() + "\n\t" + 
-				      jl3.getText() + ": " + ta3.getText());
+				      " correct?\n\t" + jl1.getText() + ta1.getText() + "\n\t" +
+				      jl2.getText() + ta2.getText() + "\n\t"); 
 			       if(option == 0) {	
         	                        try {
 	                                        Allergy ai  = new Allergy(
-							ta1.getText().toLowerCase().replace(",", " "), 
-							ta2.getText().toLowerCase().replace(",", " "),
-							ta3.getText().toLowerCase().replace(",", " "));
+							ta1.getText().toLowerCase().replace(",", "~"), 
+							ta2.getText().toLowerCase().replace(",", "~"));
                 	                        objMngmt.pushToArray("a", ai);
         	                                objMngmt.pushToDatabase("a", ai.toString());
 	

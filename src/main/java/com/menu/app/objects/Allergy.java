@@ -27,43 +27,39 @@ public class Allergy implements ObjectMaker {
 
 	// class variables
 	private String name;
-	private String description;
-	private String tx;
+	private String[] items;
 
 	// constructors
 	public Allergy() {}
 
-	public Allergy(String name, String description, String tx) {
+	public Allergy(String name, String items) {
   		setName(name);
-  		setDescription(description);
-		setTx(tx);
+  		setItems(items);
 	}
 
 	//setters
 	private void setName(String name) {
 		this.name = name;
 	}
-	private void setDescription(String description) {
-		this.description = description;
-	}
-	private void setTx(String tx) {
-		this.tx = tx;
+	private void setItems(String items) {
+		this.items = items.split("~");
 	}
 
 	//getters
 	public String getName() {
 		return name;
 	}
-	public String getDescription() {
-		return description;
-	}
-	public String getTx() {
-		return tx;
+	public String getItems() {
+		String result = "";
+		for(int i = 0; i < items.length; i++) {
+			result += items[i].trim() + "~";
+		}
+		return result.substring(0, result.length()-1);
 	}
 	
 	//object functions
 	@Override
 	public String toString() {
-		return getName() + "," + getDescription() + "," + getTx();
+		return getName() + "," + getItems();
 	}
 }

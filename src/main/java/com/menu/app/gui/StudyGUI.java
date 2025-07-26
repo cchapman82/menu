@@ -52,10 +52,10 @@ public class StudyGUI implements GUIImplementation {
 				"menu items  : ");
 		t3.setBounds(10, 120, 300, 30);
 		f.add(t3);	
-		JTextArea tA2 = new JTextArea();
-		tA2.setLineWrap(true);
+		JLabel tA2 = new JLabel();
 		tA2.setBounds(10, 160, 480, 180);
-		tA2.setText(menuItems);
+		tA2.setText("<html>" + menuItems.replace("\n", "<br>") + "<html>");
+		tA2.setVerticalAlignment(SwingConstants.TOP);
 		JScrollPane scroll = new JScrollPane(tA2);
 		scroll.setBounds(10, 160, 480, 180);
 		f.getContentPane().add(scroll);
@@ -65,7 +65,7 @@ public class StudyGUI implements GUIImplementation {
 		f.add(sl);	
 
 		JButton sb1 = new JButton("Menu");
-		sb1.setBounds(25, 400, 125, 30);
+		sb1.setBounds(31, 400, 125, 30);
 		sb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.studyItems("m", name);
@@ -73,24 +73,24 @@ public class StudyGUI implements GUIImplementation {
 			}
 		});
 		JButton sb2 = new JButton("Categories");
-		sb2.setBounds(175, 400, 125, 30);
+		sb2.setBounds(187, 400, 125, 30);
 		sb2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.studyItems("c", name);
+				Main.studyItems("cc", name);
 				f.dispose();
 			}
 		});
 		JButton sb3 = new JButton("Item");
-		sb3.setBounds(325, 400, 125, 30);
+		sb3.setBounds(343, 400, 125, 30);
 		sb3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main.studyItems("i", name);
+				Main.studyItems("ci", name);
 				f.dispose();
 			}
 		});
 
 		JButton b = new JButton("To Home");
-		b.setBounds(200, 475, 100, 30);
+		b.setBounds(175, 475, 150, 30);
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Main.setOption(".");

@@ -78,14 +78,14 @@ public class IngredientGUI implements GUIImplementation {
                 b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int option = JOptionPane.showConfirmDialog(f, "Is this information" +
-				      " correct?\n\t" + jl1.getText() + ": " + ta1.getText() + "\n\t" +
-				      jl2.getText() + ": " + ta2.getText() + "\n\t" + 
-				      jl3.getText() + ": " + ta3.getText());
+				      " correct?\n\t" + jl1.getText() + ta1.getText() + "\n\t" +
+				      jl2.getText() + ta2.getText() + "\n\t" + 
+				      jl3.getText() + ta3.getText());
 			       if(option == 0) {	
         	                        try {
 	                                        Ingredient ii  = new Ingredient(
-								ta1.getText().toLowerCase().replace(",", " "), 
-								ta2.getText().toLowerCase().replace(",", " "),
+								ta1.getText().toLowerCase().replace(",", "~"), 
+								ta2.getText().toLowerCase().replace(",", "~"),
      								Double.parseDouble(ta3.getText()));
                 	                        objMngmt.pushToArray("i", ii);
         	                                objMngmt.pushToDatabase("i", ii.toString());

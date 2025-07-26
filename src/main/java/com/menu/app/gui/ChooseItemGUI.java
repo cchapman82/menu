@@ -11,22 +11,21 @@ package com.menu.app;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.*;
 import java.util.Map;
 import java.util.HashMap;
 
 
 
-public class ChooseCategoryGUI implements GUIImplementation {
-
-                private Map<String, Integer> catNums = Study.getInstance().getCatItemNums();
-
-        ChooseCategoryGUI(String name) {
+public class ChooseItemGUI implements GUIImplementation {
 
 
+        ChooseItemGUI(String name) {
+        	String[] menuItems = ObjectMngmt.getInstance().getMenuList(name).split("\n");
 
-                JFrame f = new JFrame("Study Restaurant " + name + " Categories Home");
- 
-		JMenuBar mb = new JMenuBar();
+                JFrame f = new JFrame("Study Restaurant " + name + " Menu Items Home");
+
+                JMenuBar mb = new JMenuBar();
                 JMenu file = new JMenu("File");
                 JMenuItem exit = new JMenuItem("Exit");
                 exit.addActionListener(new ActionListener() {
@@ -41,32 +40,30 @@ public class ChooseCategoryGUI implements GUIImplementation {
                 f.add(t1);
 
                 JLabel t2 = new JLabel(name + " has these menu " +
-                                " categories, please choose one.");
+                                " items, please choose one.");
                 t2.setBounds(10, 40, 480, 30);
                 f.add(t2);
-		int xAxis = 20;
-		int yAxis = 90;
 
-		for(Map.Entry<String,Integer> e : catNums.entrySet()) {
-			JButton cb = new JButton(e.getKey());
-			cb.setBounds(xAxis, yAxis, 210, 30);
-			cb.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent ae) {
-					System.out.println(e.getKey());
-					Main.studyItems("c", e.getKey());
+		JPanel jp = new JPanel();
+		jp.setBounds(20, 90, 440,380); 
+		int rows = (menuItems.length + 3)/3;
+		jp.setLayout(new GridLayout(rows, 3));
+
+		for(int i = 0; i < menuItems.length; i++) {
+			JButton b = new JButton(menuItems[i]);
+			b.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Main.studyItems("i", b.getText());
 				}
 			});
-			f.add(cb);
-			if((xAxis + 230) <= 500) {
-				xAxis += 230;
-			} else {
-				xAxis = 20;
-				yAxis += 50;
-			}
-
+			jp.add(b);
 		}
 
-                JButton b = new JButton("To Restaurant");
+		JScrollPane sp = new JScrollPane(jp);
+		sp.setBounds(20, 90, 440, 380);
+		f.getContentPane().add(sp);
+
+		JButton b = new JButton("To Restaurant");
                 b.setBounds(175, 475, 150, 30);
                 b.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
@@ -80,10 +77,11 @@ public class ChooseCategoryGUI implements GUIImplementation {
                 mb.add(file);
                 f.setJMenuBar(mb);
 
-		f.setSize(500, 700);
+                f.setSize(500, 700);
                 f.setLayout(null);
                 f.setVisible(true);
                 f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-	}
+        }
 }
+

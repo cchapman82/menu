@@ -29,8 +29,9 @@ public class MenuAnswerGUI implements GUIImplementation {
 
         MenuAnswerGUI(String name) {
 
-
-		JFrame f = new JFrame("Menu answers for  " + name );
+		int catAnswer = Integer.parseInt(name.substring(name.indexOf(".") + 1, name.length()));
+		String cName = name.substring(0, name.indexOf("."));
+		JFrame f = new JFrame("Menu answers for  " + cName );
 
 
                 JMenuBar mb = new JMenuBar();
@@ -43,16 +44,14 @@ public class MenuAnswerGUI implements GUIImplementation {
                 });
 
 		JLabel l1 = new JLabel("Please answer the questions below...");
-		l1.setBounds(10, 20, 300, 30);
+		l1.setBounds(10, 20, 480, 30);
 		f.add(l1);
 
-		JLabel l2 = new JLabel("How many categories does this menu have?");
-		l2.setBounds(20, 60, 250, 30);
+		JLabel l2 = new JLabel("How answered that there are " +
+				       catAnswer + " categories in this menu.");
+		l2.setBounds(20, 60, 480, 30);
 		f.add(l2);
 
-		JTextField t2 = new JTextField();
-		t2.setBounds(280, 60, 25, 30);
-		f.add(t2);
 
 		JLabel l3 = new JLabel("How many items are in each category?");
 		l3.setBounds(20, 100, 300, 30);
@@ -61,7 +60,6 @@ public class MenuAnswerGUI implements GUIImplementation {
 		int yAxis = 150;
                 for (Map.Entry<String, Integer> e : catNums.entrySet()) {
                         JLabel l4  = new JLabel(e.getKey());
-                       // l4.setText(strings[i]);
                         l4.setBounds(30, yAxis, 200, 30);
                         f.add(l4);
                         JTextField t3 = new JTextField();
@@ -76,7 +74,6 @@ public class MenuAnswerGUI implements GUIImplementation {
                 ab.setBounds(200, yAxis, 100, 30);
                 ab.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {	
-				int catAnswer = Integer.parseInt(t2.getText());
 				for(int j = 0; j < answerFields.length; j++) {
 					answers.put(answerLabels[j].getText(), Integer.parseInt(answerFields[j].getText()));
 				}
@@ -87,10 +84,11 @@ public class MenuAnswerGUI implements GUIImplementation {
                 });
                 f.add(ab);
 
- 		JButton b = new JButton("To Home");
-                b.setBounds(200, 475, 100, 30);
+ 		JButton b = new JButton("To Restaurant");
+                b.setBounds(175, 475, 150, 30);
                 b.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) { 
+                        public void actionPerformed(ActionEvent e) {
+			       Main.getItem("r", cName);	
 				f.dispose();
                         }
                 });

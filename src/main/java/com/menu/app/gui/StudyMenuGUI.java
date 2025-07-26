@@ -36,33 +36,43 @@ public class StudyMenuGUI implements GUIImplementation {
                 });
 
                 JLabel t1 = new JLabel("<html>You are studying for " +
-                                 name + ".  You will be asked about this in 15 sec.<html>");
-                t1.setBounds(10, 10, 300, 30);
+                                 name + ".  You will be asked about this in 15 sec.<br><br><html>");
+                t1.setBounds(10, 10, 480, 40);
                 f.add(t1);
 
                 JLabel t2 = new JLabel(name + " has these menu " +
                                 " categories");
-                t2.setBounds(10, 40, 300, 30);
+                t2.setBounds(10, 50, 480, 30);
+		t2.setVerticalAlignment(SwingConstants.TOP);
 		f.add(t2);
 
-		JLabel t3 = new JLabel("<html>" + catNums.keySet()  + "<html>");
-		t3.setBounds(20, 70, 300, 200);
+		JLabel t3 = new JLabel("<html>" + getCategories(catNums)  + "<html>");
+		t3.setBounds(20, 90, 300, 200);
+		t3.setVerticalAlignment(SwingConstants.TOP);
+		JScrollPane sp1 = new JScrollPane(t3);
 	       f.add(t3);
+	       f.add(sp1);
 
 		JLabel t4 = new JLabel("<html>" + getCatNums(catNums) + "<html");
-		t4.setBounds(20, 270, 300, 200);
+		t4.setBounds(20, 290, 300, 185);
+		t4.setVerticalAlignment(SwingConstants.TOP);
+		JScrollPane sp2 = new JScrollPane(t4);
+		f.add(sp2);
 		f.add(t4);
 		Timer timer = new Timer(15000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				GUIFactory.getAnswerGUI("m", name);
+				f.dispose();
+				String answer = JOptionPane.showInputDialog(
+						"How Many categories are in this menu?");
+				GUIFactory.getAnswerGUI("m", name + "." + answer);
 			}	
 		});
 		timer.setRepeats(false);
 		timer.start();	
 
 
-                JButton b = new JButton("To Home");
-                b.setBounds(200, 475, 100, 30);
+                JButton b = new JButton("To Restaurant");
+                b.setBounds(175, 475, 150, 30);
                 b.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
 
@@ -84,11 +94,19 @@ public class StudyMenuGUI implements GUIImplementation {
         }
 
 	private String getCatNums(Map<String,Integer> catNums) {
-		String result = "The categories have this many items each:<br>";
+		String result = "The categories have this many items each:<br><br><br>";
 		for(Map.Entry<String, Integer> e : catNums.entrySet()) {
 			result+= e.getKey() + "		" + e.getValue() + "<br>";
 		}
-		return result.substring(0, result.length());
+		return result.substring(0, result.lastIndexOf("<br>")) + "<html>";
+	}
+
+	private String getCategories(Map<String, Integer> catNums) {
+		String result = "<html><br><br><br>";
+		for(String s : catNums.keySet()) {
+			result += s + "<br>";
+		}
+		return result.substring(0, result.lastIndexOf("<br>")) + "<html>";
 	}
 
 }
