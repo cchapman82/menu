@@ -407,7 +407,7 @@ public class DatabaseController {
 	}
 
 	//receive update information
-	public void updateInfo(String type, String itemName, Map map) {
+	public void updateInfo(String type, String itemName, Map<String, String> map) {
 		String info = "";
 		Set<String> keys = map.keySet();
 		for(String k : keys) {

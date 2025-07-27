@@ -31,7 +31,6 @@ public class Study {
 	private Boolean endCont = false;
 	private Restaurant res = null;
 	private Set<String> menuCategories = new HashSet<String>();
-//	private ArrayList<String> menuCategories = new ArrayList<String>();
 	private ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
 	private HashMap<String, ArrayList<String>> categoryItems =
 			new HashMap<String, ArrayList<String>>();
@@ -91,64 +90,16 @@ public class Study {
 				categoryItems.get(m.getMenuCategory()).add(m.getName());
 			}
 		}
-		
-/*		Boolean cont = true;
-		while (cont) {
-			endCont = false;
-			System.out.println("Enter the number for what you would like to study?" +
-				"\n 1  Whole Menu\n 2  Category\n 3  Menu Item\n stop End");
-			switch(inStudy.next()) {
-				case "1":
-					studyMenu(r.getName());
-					break;
-				case "2":
-					System.out.println("Please enter the category to study");
-					showCategories();
-					studyCategory(inStudy.next());
-					break;
-				case "3":
-					System.out.println("Please enter the number for " +
-							"the item you would like to study from " +
-							"the list above");
-				       studyItem(menuItems.get(Integer.parseInt(inStudy.next()) - 1));
-					break;
-				case "stop":
-					cont = false;
-					break;
-			}
-		}*/
 	}
 
-/*	private void studyMenu(String r) {
-		System.out.println("This menu contains these categories");
-		showCategories();
-		System.out.println("Menu Categories  for  " + r);
-		// study num of iems in category
-		while (!numQuestion(menuCategories.size(), "menu")) {
-		}
-		if (endCont == false) {
-			while (!nameQuestion(menuCategories, "menu")) {}
-		}
-		
-	}*/
+
 
 	public ArrayList<String> getCatItems(String category) {
 		return categoryItems.get(category);
-/*		Boolean cont = true;
-		System.out.println("Category  :  " + category);
-		for (String s : categoryItemStrings) {
-			System.out.println(s);
-		}
-		// study num of iems in category
-		while (!numQuestion(categoryItemStrings.size(), "category")) {
-		}
-		if (endCont == false) {
-			while (!nameQuestion(categoryItemStrings, "category")) {}
-		}*/
 	}
 
 
-	private void studyItem(MenuItem m) {
+	/*private void studyItem(MenuItem m) {
 		System.out.println(m.getName());
 		System.out.println(m.getIngredients());
 		String[] ingredients = m.getIngredients().split("\\. ");
@@ -236,7 +187,7 @@ public class Study {
 		return correct;	
 	}
 
-	//helper functions
+	helper functions
 	private int getNumInput() {
 		String s = inStudy.next();
 		int result = 0;
@@ -251,5 +202,5 @@ public class Study {
 			getNumInput();
 		}
 		return result;
-	}
+	}*/
 }

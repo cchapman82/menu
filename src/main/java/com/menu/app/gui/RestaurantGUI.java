@@ -81,18 +81,19 @@ public class RestaurantGUI implements GUIImplementation {
                 b.setBounds(220, 430, 100, 30);
                 b.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-				int option = JOptionPane.showConfirmDialog(f, "Is this information" +
-				      " correct?\n\t" + jl1.getText() + ta1.getText() + "\n\t" +
-				      jl2.getText() + ta2.getText() + "\n\t" + 
-				      jl3.getText() + ta3.getText());
-			       if(option == 0) {	
+							int option = JOptionPane.showConfirmDialog(f, "Is this information" +
+				      		" correct?\n\t" + jl1.getText() + ta1.getText() + "\n\t" +
+				      		jl2.getText() + ta2.getText() + "\n\t" + 
+				      		jl3.getText() + ta3.getText());
+			       			if(option == 0) {	
                                 	try {
-						Restaurant ri = new Restaurant(ta1.getText().toLowerCase().replace(",", "~"), ta2.getText().toLowerCase().replace(",", "~"), ta3.getText().toLowerCase().replace(",", "~"));
-						objMngmt.pushToArray("r", ri);
+											Restaurant ri = new Restaurant(ta1.getText().toLowerCase().replace(",", "~"), ta2.getText().toLowerCase().replace(",", "~"), ta3.getText().toLowerCase().replace(",", "~"));
+											objMngmt.pushToArray("r", ri);
 	                                        objMngmt.pushToDatabase("r", ri.toString());
-					} catch (Exception ec) {
+											Main.setOption(".");
+										} catch (Exception ec) {
         	                                  JOptionPane.showMessageDialog(f, "Restaurant not entered, please try again");
-	                               }
+	                               		}
 			       } else if(option == 1) {
 				       jl4.setText("Please re-enter the information");
 			       } else if(option == 2) {

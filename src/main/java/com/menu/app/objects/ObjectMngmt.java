@@ -77,7 +77,7 @@ public class ObjectMngmt {
 
 	// add object info based on type
 	public void addItem(String type) {
-		ObjectMaker om = of.getObject(type);
+		of.getObject(type);
 	}
 
 	//make list based on databse string

@@ -89,12 +89,12 @@ public class IngredientGUI implements GUIImplementation {
 			       if(option == 0) {	
         	                        try {
 	                                        Ingredient ii  = new Ingredient(
-								ta1.getText().toLowerCase().replace(",", "~"), 
-								ta2.getText().toLowerCase().replace(",", "~"),
-     								Double.parseDouble(ta3.getText()));
+											ta1.getText().toLowerCase().replace(",", "~"), 
+											ta2.getText().toLowerCase().replace(",", "~"),
+     										Double.parseDouble(ta3.getText()));
                 	                        objMngmt.pushToArray("i", ii);
         	                                objMngmt.pushToDatabase("i", ii.toString());
-	
+											Main.setOption(".");
                 	               } catch (Exception ec) {
         	                                  JOptionPane.showMessageDialog(f,"Ingredient not entered, please try again");
 	                               }

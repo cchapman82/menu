@@ -82,10 +82,11 @@ public class AllergyGUI implements GUIImplementation {
 			       if(option == 0) {	
         	                        try {
 	                                        Allergy ai  = new Allergy(
-							ta1.getText().toLowerCase().replace(",", "~"), 
-							ta2.getText().toLowerCase().replace(",", "~"));
+											ta1.getText().toLowerCase().replace(",", "~"), 
+											ta2.getText().toLowerCase().replace(",", "~"));
                 	                        objMngmt.pushToArray("a", ai);
         	                                objMngmt.pushToDatabase("a", ai.toString());
+											Main.setOption(".");
 	
                 	               } catch (Exception ec) {
         	                                  JOptionPane.showMessageDialog(f,
