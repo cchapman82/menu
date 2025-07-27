@@ -96,11 +96,11 @@ public class IndexGUI implements GUIImplementation {
 				if (name.equals("") || name.equals( null)) {
 					l3.setText("No restaurant entered " +
 							"Please try again");
-				} else if (ObjectMngmt.checkIfExists("r", name.
+				} else if (ObjectMngmt.getInstance().checkIfExists("r", name.
 							toLowerCase())) {
 					Main.getItem("r", name.toLowerCase());
 					f.dispose();
-				} else if (ObjectMngmt.checkIfExists("r", name.
+				} else if (ObjectMngmt.getInstance().checkIfExists("r", name.
 							toLowerCase()).
 							equals(false)) {
 					Main.findItems("r", name);

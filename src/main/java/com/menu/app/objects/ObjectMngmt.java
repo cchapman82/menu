@@ -204,7 +204,7 @@ public class ObjectMngmt {
 	//helper methods
 	//
 	// check if item exisits in list based on type of item and name of item
-	public static Boolean checkIfExists(String type, String name) {
+	public Boolean checkIfExists(String type, String name) {
 		Boolean result = false;
 		switch(type) {
 			case "m" :

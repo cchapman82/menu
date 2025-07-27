@@ -1,6 +1,5 @@
 package com.menu.app;
 
-import com.menu.app.database.DatabaseController;
 import com.menu.app.objects.ObjectMngmt;
 
 /*
@@ -35,7 +34,6 @@ import com.menu.app.objects.ObjectMngmt;
 public class MainController {
 
 	private ObjectMngmt objMngmt = ObjectMngmt.getInstance();
-	private DatabaseController dc = DatabaseController.getInstance();
 	private static MainController mc = null;
 
 	// default constructory
