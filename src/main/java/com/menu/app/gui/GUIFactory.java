@@ -12,73 +12,72 @@ public class GUIFactory {
 
 	public static GUIImplementation getGUI(String s, String name) {
 
+		switch (s) {
 
-		switch(s) {
-			
-			case "ix" :
+			case "ix":
 				return new IndexGUI();
-			case "m" :
+			case "m":
 				return new MenuItemGUI(name);
-			case "a" :
+			case "a":
 				return new AllergyGUI(name);
-			case "r" :
+			case "r":
 				return new RestaurantGUI(name);
-			case "i" :
+			case "i":
 				return new IngredientGUI(name);
-			case "s" :
+			case "s":
 				return new StudyGUI(name);
-			case "mc" :
+			case "mc":
 				return new MICollisionGUI(name);
-			default :
+			default:
 				return new IndexGUI();
 		}
-		
+
 	}
 
 	public static GUIImplementation getGUI(String s, String type, String name) {
-		switch(s) {
-			case "f" :
+		switch (s) {
+			case "f":
 				return new FindGUI(type, name);
-			case "s" :
-				switch(type) {
-					case "m" :
+			case "s":
+				switch (type) {
+					case "m":
 						return new StudyMenuGUI(name);
-					case "cc" :
+					case "cc":
 						return new ChooseCategoryGUI(name);
-					case "c" :
+					case "c":
 						return new StudyCategoryGUI(name);
-					case "ci" :
+					case "ci":
 						return new ChooseItemGUI(name);
-					case "i" :
+					case "i":
 						return new StudyItemGUI(name);
 				}
-			case "u" :
-				switch(type) {
-					case "m" :
+			case "u":
+				switch (type) {
+					case "m":
 						return new UpdateMIGUI(type, name);
-					case "a" :
+					case "a":
 						return new UpdateAGUI(type, name);
-					case "i" :
+					case "i":
 						return new UpdateIGUI(type, name);
-					case "r" :
+					case "r":
 						return new UpdateRGUI(type, name);
 				}
-			case "d" :
+			case "d":
 				return new DisplayGUI(type, name);
-			default :
+			default:
 				return new IndexGUI();
 		}
 	}
 
 	public static GUIImplementation getAnswerGUI(String type, String name) {
-		switch(type) {
-			case "m" :
+		switch (type) {
+			case "m":
 				return new MenuAnswerGUI(name);
-			case "c" :
-		 		return new CategoryAnswerGUI(name);
-			case "i" :
-		 		return new ItemAnswerGUI(name);
-			default :
+			case "c":
+				return new CategoryAnswerGUI(name);
+			case "i":
+				return new ItemAnswerGUI(name);
+			default:
 				return new IndexGUI();
 		}
 	}

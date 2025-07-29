@@ -1,5 +1,16 @@
 package com.menu.app;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.menu.app.database.DatabaseController;
+import com.menu.app.gui.GUIFactory;
 import com.menu.app.objects.ObjectMngmt;
 
 /*
@@ -35,9 +46,12 @@ public class MainController {
 
 	private ObjectMngmt objMngmt = ObjectMngmt.getInstance();
 	private static MainController mc = null;
+	private static List<String> strings;
+	private String fileName = "src\\main\\resources\\config.properties";
 
 	// default constructory
-	private MainController () {}
+	private MainController() {
+	}
 
 	// access singleton object
 	public static MainController getInstance() {
@@ -47,13 +61,15 @@ public class MainController {
 			return mc;
 		}
 	}
-	
+
 	// instantiate initial lists
 	public void openApp() {
-			objMngmt.makeRestaurants();
-		}
+		DatabaseController.getInstance();
+		objMngmt.makeRestaurants();
+		Main.setOption(".");
+	}
 
-	// function to get the first option --  add menu item
+	// function to get the first option -- add menu item
 	public void addMainItem(String type) {
 		objMngmt.addItem(type);
 	}
@@ -64,5 +80,6 @@ public class MainController {
 	}
 
 	// kill app -- add printing/logging actions
-	public void closeApp() {}
+	public void closeApp() {
+	}
 }
